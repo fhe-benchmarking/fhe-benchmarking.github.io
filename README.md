@@ -44,6 +44,8 @@ Each workload repository includes a `harness` subdirectory (provided by us), and
 
 Core workload computation must be performed on encrypted data, but pre-processing before encryption and post-processing after decryption are allowed. Submitters must explicitly document these steps, if they are used.
 
+To make comparisons easier, software-only submissions should be tested on similar platforms. Currently (2026) we recommend platforms with 4th-gen Intel Xeon (Sapphire Rapids), with around 90 vCPUs and around 192GB memory. Example of such platforms include EC2 C7i.metal-24XL, GCP C3 HighCPU-88, and Azure D96lv-v6. Submissions that reply on accelerated copmuting should specify the acceleration hardware that they use. (For example how many GPUs of what type.)
+
 ### Security Requirements
 
 Workloads must be encrypted with parameters supporting **at least 128-bit security**. Submitters must specify why they believe their submission provides the required security level.
