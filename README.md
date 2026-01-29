@@ -81,4 +81,4 @@ Visit the Homomorphic Encryption Standardization community:
 
 ---
 
-[Code of Conduct](./CODE_OF_CONDUCT.md) | © 2025 [HomomorphicEncryption.org](https://homomorphicencryption.org)
+[Code of Conduct](./CODE_OF_CONDUCT.html) | © 2025 [HomomorphicEncryption.org](https://homomorphicencryption.org)
