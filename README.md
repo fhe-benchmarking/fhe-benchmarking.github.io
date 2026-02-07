@@ -4,7 +4,7 @@
 
 ## About the FHE Benchmarking Suite
 
-This Benchmarking Suite provides standardized workloads and metrics to help application developers evaluate whether FHE is feasible for their use cases. Our goal is to enable informed decisions about deploying FHE solutions, by providing comprehensive performance data across different implementations and platforms.
+This Benchmarking Suite provides standardized workloads and metrics to help application developers evaluate whether FHE is feasible for their use cases. Our goal is to enable informed decisions about deploying FHE solutions, by providing comprehensive performance data across different workloads, implementations, and platforms.
 
 Each benchmark provides comprehensive metrics including:
 
@@ -34,17 +34,17 @@ Each workload represents a real-world use case with clear specifications, refere
 
 The benchmarking suite is organized around a set of git repositories under [github.com/fhe-benchmarking](https://github.com/fhe-benchmarking).
 
-Each workload repository includes a `harness` subdirectory (provided by us), and a `submission` subdirectory that submitters fill with their solution.
+Each workload repository includes a `harness` subdirectory (provided by us), and a `submission` (or `submission_remote`) subdirectory that submitters populate with their solution.
 
 ### Submission Directory Content
 
-- **Open-source software submission:** The `submission` subdirectory must contain the complete implementation code.
-- **Hardware-based submission:** Must contain shims for communicating with the backend where the actual implementation resides. It is highly recommended to open-source the encryption/decryption code even for those submissions.
-- **Closed-source software:** Can either use a shim with backend implementation (as for hardware), or include a pre-compiled library or container with shims that call them.
+- **Open-source software submission:** The `submission/` subdirectory must contain the complete implementation code.
+- **Hardware-based submission:** The `submission_remote/` subdirectory must contain shims for communicating with the backend where most of the actual implementation resides. The cryptographic parameters and encryption/decryption code should be public even for those submissions.
+- **Closed-source software:** Can either use shims in `submission_remote/` with backend implementation (as for hardware), or include a pre-compiled library or container with shims in `submission/` that call them.
 
-Core workload computation must be performed on encrypted data, but pre-processing before encryption and post-processing after decryption are allowed. Submitters must explicitly document these steps, if they are used.
+Core workload computation must be performed on encrypted data, though pre-processing before encryption and post-processing after decryption are permitted. Submitters must explicitly document these steps, if they are used.
 
-To make comparisons easier, software-only submissions should be tested on similar platforms. Currently (2026) we recommend platforms with 4th-gen Intel Xeon (Sapphire Rapids), with around 90 vCPUs and around 192GB memory. Example of such platforms include EC2 C7i.metal-24XL, GCP C3 HighCPU-88, and Azure D96lv-v6. Submissions that reply on accelerated copmuting should specify the acceleration hardware that they use. (For example how many GPUs of what type.)
+For consistent comparisons, software-only submissions should be tested on similar platforms. Currently (2026) we recommend platforms with 5th-gen Intel Xeon (Emerald Rapids), with 96 vCPUs and ample memory. Examples of such platforms include EC2 I7ie.24xl, GCP c4-highmem-96, and Azure Standard-E96s-v6. (Submitters may want to use "metal" instances to avoid noisy-neighbor issues.) Submissions that rely on accelerated computing should specify the acceleration hardware used (e.g., number and type of GPUs).
 
 ### Security Requirements
 
@@ -54,18 +54,18 @@ Workloads must be encrypted with parameters supporting **at least 128-bit securi
 
 Submitters must update the README file with instructions on how to run their workload.
 
-- If a backend is required, the README must include the procedure for getting access to that backend. *Backends should remain available for at least a few weeks following initial submission* to allow result replication. Submitters are *not* required to provide access to everyone, but are expected to allow reasonable validation of their claimed performance.
-- The README must also include a description of how the solution works, FHE scheme(s) and parameters, and why this implementation enjoys at least 128-bit security. (Alternatively it can include a pointer to somewhere else where this is described.)
+- If a backend is required, the README must include procedures for obtaining access to that backend. *Backends should remain available for at least a few weeks following initial submission* to allow result replication. Submitters are *not* required to provide access to everyone, but are expected to allow reasonable validation of their claimed performance.
+- The README must also include a description of how the solution works, FHE scheme(s) and parameters, and why this implementation enjoys at least 128-bit security. (Alternatively, the README can reference external documentation where this is described.)
 
 ## How to Submit Solutions
 
 When implementing one of the workloads from the benchmarking suite, submitters must:
 
 1. Fork the relevant repository under [github.com/fhe-benchmarking](https://github.com/fhe-benchmarking)
-2. Replace the content of the `submission` subdirectory with their own implementation. Submitters must NOT change anything under the `harness` subdirectory. Any changes to the harness must be done by communicating with the benchmarking suite organizers.
+2. Replace the content of the `submission/` or `submission_remote/` subdirectories with their own implementation. Submitters must NOT change anything under the `harness` subdirectory. Any changes to the harness must be done by communicating with the benchmarking suite organizers.
 3. Update the README with all relevant information, and optionally provide more documentation in the `docs` subdirectory.
 
-Once the submission is complete, submitters should inform the benchmarking suite organizers by email and make their fork of the relevant repository public. The organizers will then incorporate the performance results from that submission into a table of results for the relevant workload, and include in that table a link to the submitter's fork.
+Once the submission is complete, submitters should inform the benchmarking suite organizers by filing [this Google form](https://docs.google.com/forms/d/e/1FAIpQLSdZfqKcBTbzWBIToidfJCEFGUDJhQUEnLO8m0NGAypLO0BC2Q/viewform), and make their fork of the relevant repository public. The organizers will then incorporate the performance results from that submission into a table of results for the relevant workload, and include in that table a link to the submitter's fork.
 
 ## Contact & Resources
 
@@ -81,4 +81,4 @@ Visit the Homomorphic Encryption Standardization community:
 
 ---
 
-[Code of Conduct](./CODE_OF_CONDUCT.html) | © 2025 [HomomorphicEncryption.org](https://homomorphicencryption.org)
+[Code of Conduct](./CODE_OF_CONDUCT.html) | © 2026 [HomomorphicEncryption.org](https://homomorphicencryption.org) | Last updated 2026-02-07
