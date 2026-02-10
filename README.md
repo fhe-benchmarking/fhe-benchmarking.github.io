@@ -48,6 +48,16 @@ Core workload computation must be performed on encrypted data, though pre-proces
 
 For consistent comparisons, software-only submissions should be tested on similar platforms. Currently (2026) we recommend platforms with 5th-gen Intel Xeon (Emerald Rapids), with 96 vCPUs and ample memory. Examples of such platforms include EC2 I7ie.24xl, GCP c4-highmem-96, and Azure Standard-E96s-v6. (Submitters may want to use "metal" instances to avoid noisy-neighbor issues.) Submissions that rely on accelerated computing should specify the acceleration hardware used (e.g., number and type of GPUs).
 
+## How to Submit Solutions
+<details>
+<summary>When implementing one of the workloads from the benchmarking suite, submitters must:</summary>
+
+1. Fork the relevant repository under [github.com/fhe-benchmarking](https://github.com/fhe-benchmarking)
+2. Replace the content of the `submission/` or `submission_remote/` subdirectories with their own implementation. Submitters must NOT change anything under the `harness` subdirectory. Any changes to the harness must be done by communicating with the benchmarking suite organizers.
+3. Update the README with all relevant information, and optionally provide more documentation in the `docs` subdirectory.
+
+Once the submission is complete, submitters should inform the benchmarking suite organizers by filing [this Google form](https://docs.google.com/forms/d/e/1FAIpQLSdZfqKcBTbzWBIToidfJCEFGUDJhQUEnLO8m0NGAypLO0BC2Q/viewform), and make their fork of the relevant repository public. The organizers will then incorporate the performance results from that submission into a table of results for the relevant workload, and include in that table a link to the submitter's fork.
+
 ### Security Requirements
 
 Workloads must be encrypted with parameters supporting **at least 128-bit security**. Submitters must specify why they believe their submission provides the required security level.
@@ -59,15 +69,6 @@ Submitters must update the README file with instructions on how to run their wor
 - If a backend is required, the README must include procedures for obtaining access to that backend. *Backends should remain available for at least a few weeks following initial submission* to allow result replication. Submitters are *not* required to provide access to everyone, but are expected to allow reasonable validation of their claimed performance.
 - The README must also include a description of how the solution works, FHE scheme(s) and parameters, and why this implementation enjoys at least 128-bit security. (Alternatively, the README can reference external documentation where this is described.)
 
-## How to Submit Solutions
-<details>
-<summary>When implementing one of the workloads from the benchmarking suite, submitters must:</summary>
-
-1. Fork the relevant repository under [github.com/fhe-benchmarking](https://github.com/fhe-benchmarking)
-2. Replace the content of the `submission/` or `submission_remote/` subdirectories with their own implementation. Submitters must NOT change anything under the `harness` subdirectory. Any changes to the harness must be done by communicating with the benchmarking suite organizers.
-3. Update the README with all relevant information, and optionally provide more documentation in the `docs` subdirectory.
-
-Once the submission is complete, submitters should inform the benchmarking suite organizers by filing [this Google form](https://docs.google.com/forms/d/e/1FAIpQLSdZfqKcBTbzWBIToidfJCEFGUDJhQUEnLO8m0NGAypLO0BC2Q/viewform), and make their fork of the relevant repository public. The organizers will then incorporate the performance results from that submission into a table of results for the relevant workload, and include in that table a link to the submitter's fork.
 </details>
 
 ## Contact & Resources
@@ -84,4 +85,4 @@ Visit the Homomorphic Encryption Standardization community:
 
 ---
 
-[Code of Conduct](./CODE_OF_CONDUCT.html) | © 2026 [HomomorphicEncryption.org](https://homomorphicencryption.org) | Last updated 2026-02-07
+[Code of Conduct](./CODE_OF_CONDUCT.html) | © 2026 [HomomorphicEncryption.org](https://homomorphicencryption.org) | Last updated 2026-02-10
