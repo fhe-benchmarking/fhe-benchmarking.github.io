@@ -1,96 +1,139 @@
-$(document).ready(function() {
-    // Pattern to match JSON files
-    const jsonPattern = /.*\.json$/;
-    let jsonFiles = [];
-    let allData = [];
-    let allKeys = new Set();
-
-    jsonFiles = ['submission_01.json', 'submission_02.json', 'submission_03.json']; // List of JSON files to load
-    
-    
-    loadJsonFiles();
-
-    // Function to flatten nested JSON objects
-    function flattenJson(obj, prefix = '') {
-        let flattened = {};
-        for (let key in obj) {
-            if (obj.hasOwnProperty(key)) {
-                let newKey = prefix ? prefix + '_' + key : key;
-                if (typeof obj[key] === 'object' && obj[key] !== null) {
-                    Object.assign(flattened, flattenJson(obj[key], newKey));
-                } else {
-                    flattened[newKey] = obj[key];
-                }
-            }
-        }
-        console.log('Flattened JSON:', flattened);
-        return flattened;
-    }
-
-    // Load all JSON files
-    function loadJsonFiles() {
-        let loadedCount = 0;
-        $.each(jsonFiles, function(index, file) {
-            $.ajax({
-                url: file,
-                dataType: 'json',
-                success: function(data) {     
-                    let flatData = flattenJson(data);
-                    allData.push({ file: file, data: flatData });
-                    
-                    // Collect all keys
-                    $.each(flatData, function(key) {
-                        allKeys.add(key);
-                    });
-                    
-                    loadedCount++;
-                    if (loadedCount === jsonFiles.length) {
-                        createComparisonTable();
-                    }
-                },
-                error: function(xhr, status, error) {
-                    $('#results').append($('<p>').text('Error loading ' + file + ': ' + error));
-                }
-            });
-        });
-    }
-
-    // Create comparison table once all data is loaded
-    function createComparisonTable() {
-        let $table = $('<table id="comparisonTable" class="display"></table>');
+$(document).ready(async function() {
+    try {
+        // List of JSON files to load
+        const jsonFiles = ['./measurements/submission_01.json', './measurements/submission_02.json', './measurements/submission_03.json'];
         
-        // Create header row with all keys
-        let $thead = $('<thead>');
-        let $headerRow = $('<tr>');
-        $headerRow.append($('<th>').text('Submission'));
-        $.each(Array.from(allKeys).sort(), function(index, key) {
-            $headerRow.append($('<th>').text(key.replace(/_/g, ' ')));
-        });
-        $thead.append($headerRow);
-        $table.append($thead);
-
-        // Create table body with data rows
-        let $tbody = $('<tbody>');
-        $.each(allData, function(index, item) {
-            let $dataRow = $('<tr>');
-            // Extract filename without extension
-            let fileName = item.file.split('/').pop().replace('.json', '');
-            $dataRow.append($('<td>').text(fileName));
-            $.each(Array.from(allKeys).sort(), function(keyIndex, key) {
-                let value = item.data[key] || '-';
-                $dataRow.append($('<td>').text(value));
-            });
-            $tbody.append($dataRow);
-        });
-        $table.append($tbody);
-
-        $('#results').append($table);
+        // Load all JSON data
+        const allData = await loadJsonFiles(jsonFiles);
         
-        // Initialize DataTables plugin
-        $('#comparisonTable').DataTable({
-            responsive: true,
-            pageLength: 10,
-            order: [[0, 'asc']]
-        });
+        // Create and display table
+        createComparisonTable(allData);
+    } catch (error) {
+        showError('Failed to load data: ' + error.message);
     }
 });
+
+// Load a single JSON file
+async function loadJsonFile(url) {
+    const response = await fetch(url);
+    if (!response.ok) {
+        throw new Error(`Failed to load ${url}`);
+    }
+    return response.json();
+}
+
+// Load all JSON files and flatten data
+async function loadJsonFiles(jsonFiles) {
+    const promises = jsonFiles.map(async (file) => {
+        try {
+            const data = await loadJsonFile(file);
+            const fileName = file.split('/').pop().replace('.json', '');
+            return { fileName, data: flattenJson(data) };
+        } catch (error) {
+            console.error('Error loading ' + file + ':', error);
+            return null;
+        }
+    });
+    
+    const results = await Promise.all(promises);
+    return results.filter(item => item !== null);
+}
+
+// Flatten nested JSON objects with underscore-separated keys
+function flattenJson(obj, prefix = '') {
+    const flattened = {};
+    
+    for (const key in obj) {
+        if (obj.hasOwnProperty(key)) {
+            const newKey = prefix ? prefix + '_' + key : key;
+            const value = obj[key];
+            
+            if (value !== null && typeof value === 'object' && !Array.isArray(value)) {
+                Object.assign(flattened, flattenJson(value, newKey));
+            } else {
+                flattened[newKey] = value;
+            }
+        }
+    }
+    
+    return flattened;
+}
+
+// Collect all unique keys across all submissions
+function collectAllKeys(allData) {
+    const keys = new Set();
+    
+    allData.forEach(item => {
+        Object.keys(item.data).forEach(key => keys.add(key));
+    });
+    
+    return Array.from(keys).sort();
+}
+
+// Create comparison table using jQuery
+function createComparisonTable(allData) {
+    const sortedKeys = collectAllKeys(allData);
+    const $table = $('<table id="comparisonTable" class="display"></table>');
+    
+    // Create table header
+    const $thead = createTableHeader(sortedKeys);
+    $table.append($thead);
+    
+    // Create table body
+    const $tbody = createTableBody(allData, sortedKeys);
+    $table.append($tbody);
+    
+    // Add table to page
+    $('#results').append($table);
+    
+    // Initialize DataTables
+    $('#comparisonTable').DataTable({
+        responsive: true,
+        pageLength: 10,
+        order: [[0, 'asc']]
+    });
+}
+
+// Create table header
+function createTableHeader(sortedKeys) {
+    const $thead = $('<thead>');
+    const $headerRow = $('<tr>');
+    
+    $headerRow.append($('<th>').text('Submission'));
+    
+    sortedKeys.forEach(key => {
+        $headerRow.append($('<th>').text(key.replace(/_/g, ' ')));
+    });
+    
+    $thead.append($headerRow);
+    return $thead;
+}
+
+// Create table body with data rows
+function createTableBody(allData, sortedKeys) {
+    const $tbody = $('<tbody>');
+    
+    allData.forEach(item => {
+        const $row = $('<tr>');
+        $row.append($('<td>').text(item.fileName));
+        
+        sortedKeys.forEach(key => {
+            const value = item.data[key] !== undefined ? item.data[key] : '-';
+            $row.append($('<td>').text(value));
+        });
+        
+        $tbody.append($row);
+    });
+    
+    return $tbody;
+}
+
+// Display error message
+function showError(message) {
+    $('#results').html(
+        $('<p>').css({
+            color: 'red',
+            fontWeight: 'bold'
+        }).text('Error: ' + message)
+    );
+}
