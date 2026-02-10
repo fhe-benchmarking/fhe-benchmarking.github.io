@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Workload 1 Results</title>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #FAFAFA;
+            color: #212121;
+        }
+        
+        h1 {
+            color: #212121;
+            font-size: 2em;
+            margin-bottom: 30px;
+            font-weight: 600;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #388E3C;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #388E3C;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9em;
+        }
+        
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        
+        .back-link::before {
+            content: "← ";
+        }
+        
+        #results {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        table.dataTable {
+            border-collapse: separate !important;
+            border-spacing: 0;
+            width: 100% !important;
+            margin: 0 !important;
+            border: 1px solid #E0E0E0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        table.dataTable thead tr:first-child th {
+            background-color: #388E3C;
+            color: white;
+            font-weight: 600;
+            font-size: 0.95em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 18px 12px;
+            border: none;
+            white-space: nowrap;
+        }
+        
+        table.dataTable thead tr:nth-child(2) th {
+            background-color: #66BB6A;
+            color: white;
+            font-weight: 500;
+            font-size: 0.9em;
+            padding: 14px 12px;
+            border: none;
+            white-space: normal;
+            word-wrap: break-word;
+        }
+        
+        table.dataTable tbody td {
+            padding: 12px;
+            border-bottom: 1px solid #E0E0E0;
+            border-right: 1px solid #F5F5F5;
+            font-size: 0.9em;
+            color: #424242;
+            white-space: nowrap;
+        }
+        
+        table.dataTable tbody td:first-child {
+            font-weight: 500;
+            color: #212121;
+            background-color: #FAFAFA;
+            max-width: 250px;
+            white-space: normal;
+            word-break: break-word;
+        }
+        
+        table.dataTable tbody tr:hover {
+            background-color: #F5F5F5;
+        }
+        
+        table.dataTable tbody tr:nth-child(even) {
+            background-color: #FAFAFA;
+        }
+        
+        table.dataTable tbody tr:nth-child(even):hover {
+            background-color: #EEEEEE;
+        }
+        
+        /* DataTables controls styling */
+        .dataTables_wrapper .dataTables_length,
+        .dataTables_wrapper .dataTables_filter {
+            margin-bottom: 15px;
+        }
+        
+        .dataTables_wrapper .dataTables_length select {
+            padding: 6px 12px;
+            border: 1px solid #BDBDBD;
+            border-radius: 4px;
+            margin: 0 5px;
+        }
+        
+        .dataTables_wrapper .dataTables_filter input {
+            padding: 8px 12px;
+            border: 1px solid #BDBDBD;
+            border-radius: 4px;
+            margin-left: 8px;
+            width: 250px;
+        }
+        
+        .dataTables_wrapper .dataTables_info {
+            padding-top: 15px;
+            color: #757575;
+        }
+        
+        .dataTables_wrapper .dataTables_paginate {
+            padding-top: 15px;
+        }
+        
+        .dataTables_wrapper .dataTables_paginate .paginate_button {
+            padding: 6px 12px;
+            margin: 0 2px;
+            border-radius: 4px;
+            border: 1px solid #BDBDBD;
+            background: white;
+        }
+        
+        .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+            background: #4CAF50;
+            color: white !important;
+            border-color: #4CAF50;
+        }
+        
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+            background: #388E3C;
+            color: white !important;
+            border-color: #388E3C;
+        }
+        
+        /* Error message styling */
+        p[style*="color: red"] {
+            background-color: #FFEBEE;
+            border-left: 4px solid #F44336;
+            padding: 15px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <a href="../" class="back-link">Back to Results</a>
+    <h1>ML Inference Single Results</h1>
+    <div id="results"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

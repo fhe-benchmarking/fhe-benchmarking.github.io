@@ -1,0 +1,14 @@
+{
+  "total_latency_s": 20.4319,
+  "per_stage": {
+    "Dataset_generation": "0.4448s",
+    "Key_generation": "1.0218s",
+    "Encryption": "0.1215s",
+    "Homomorphic_mul": "19.8324s",
+    "Decryption": "0.0113s"
+  },
+  "bandwidth": {
+    "key_size": "1234567",
+    "ciphertext_size": "1234567"
+  }
+}
