@@ -1,8 +1,12 @@
 $(document).ready(async function() {
     try {
-        // List of JSON files to load
-        const jsonFiles = ['./measurements/submission_01.json', './measurements/submission_02.json', './measurements/submission_03.json'];
+        // Fetch and parse JSON files
+        const jsonFiles = await getJsonFilesFromDirectory();
         
+        if (jsonFiles.length === 0) {
+            showError('No JSON files found in measurements directory.');
+            return;
+        }
         // Load all JSON data
         const allData = await loadJsonFiles(jsonFiles);
         
@@ -12,6 +16,24 @@ $(document).ready(async function() {
         showError('Failed to load data: ' + error.message);
     }
 });
+
+// Fetch directory listing and discover JSON files
+async function getJsonFilesFromDirectory() {
+    try {
+        const response = await fetch('./measurements/');
+        const html = await response.text();
+        
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        const links = doc.querySelectorAll('a[href$=".json"]');
+        
+        return Array.from(links)
+            .map(link => './measurements/' + link.getAttribute('href'))
+            .filter(href => href.endsWith('.json'));
+    } catch (error) {
+        throw new Error('Cannot access measurements directory');
+    }
+}
 
 // Load a single JSON file
 async function loadJsonFile(url) {
