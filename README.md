@@ -28,6 +28,8 @@ Each workload represents a real-world use case with clear specifications, refere
 
 - [**ML Inference**](https://github.com/fhe-benchmarking/ml-inference). Privacy-preserving machine learning inference on encrypted inputs. Currently features MNIST digit classification, with other models to come.
 
+- [**Zn Multiplication**](https://github.com/fhe-benchmarking/Zn-multiplication). Multiplication of two encrypted 64-bit encrypted integers. Other bit-sizes for the multiplicands will be added.
+
 *Additional workloads are under development. Check back for updates.*
 
 ## Suite Structure
@@ -58,8 +60,8 @@ Submitters must update the README file with instructions on how to run their wor
 - The README must also include a description of how the solution works, FHE scheme(s) and parameters, and why this implementation enjoys at least 128-bit security. (Alternatively, the README can reference external documentation where this is described.)
 
 ## How to Submit Solutions
-
-When implementing one of the workloads from the benchmarking suite, submitters must:
+<details>
+<summary>When implementing one of the workloads from the benchmarking suite, submitters must:</summary>
 
 1. Fork the relevant repository under [github.com/fhe-benchmarking](https://github.com/fhe-benchmarking)
 2. Replace the content of the `submission/` or `submission_remote/` subdirectories with their own implementation. Submitters must NOT change anything under the `harness` subdirectory. Any changes to the harness must be done by communicating with the benchmarking suite organizers.
@@ -67,6 +69,7 @@ When implementing one of the workloads from the benchmarking suite, submitters m
 4. Update the README with all relevant information, and optionally provide more documentation in the `docs` subdirectory.
 
 Once the submission is complete, submitters should inform the benchmarking suite organizers by filing [this Google form](https://docs.google.com/forms/d/e/1FAIpQLSdZfqKcBTbzWBIToidfJCEFGUDJhQUEnLO8m0NGAypLO0BC2Q/viewform), and make their fork of the relevant repository public. The organizers will then incorporate the performance results from that submission into a table of results for the relevant workload, and include in that table a link to the submitter's fork.
+</details>
 
 ## Contact & Resources
 
