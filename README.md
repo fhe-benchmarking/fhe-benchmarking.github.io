@@ -71,8 +71,8 @@ Once the submission is complete, submitters should inform the benchmarking suite
 
 ### Get in Touch
 
-For questions, submissions, or to get involved:
-**Email:** [benchmarking@homomorphicencryption.org](mailto:benchmarking@homomorphicencryption.org)
+For questions or to get involved:
+**Email:** [fhe-benchmarking@homomorphicencryption.org](mailto:fhe-benchmarking@homomorphicencryption.org)
 
 ### Learn More
 
@@ -81,4 +81,4 @@ Visit the Homomorphic Encryption Standardization community:
 
 ---
 
-[Code of Conduct](./CODE_OF_CONDUCT.html) | © 2026 [HomomorphicEncryption.org](https://homomorphicencryption.org) | Last updated 2026-02-07
+[Code of Conduct](./CODE_OF_CONDUCT.html) | © 2026 [HomomorphicEncryption.org](https://homomorphicencryption.org) | Last updated 2026-02-10
