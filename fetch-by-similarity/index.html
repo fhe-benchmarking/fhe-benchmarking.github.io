@@ -55,10 +55,10 @@ Below we say that a vector <b>k</b><sub>i</sub> is similar to the query <b>q</b>
 SIM(<b>q</b>) = { i &isin; [N] : <b>q</b> &middot; <b>k</b><sub>i</sub> &gt; 0.8 }.
 </blockquote>
 
-<p>The workload includes two interfaces that benchmark submitters must implement: </p>
+<p>The workload includes two interfaces for benchmark submitters to implement: </p>
 
 <ul type="disc">
- <li>Count matches. On query vector <b>q</b>, the answer is the number of similar vectors <b>q</b>. That is, the cardinality of the set SIM(<b>q</b>).</li>
+ <li>Count matches. On query vector <b>q</b>, the answer is the number of similar vectors to <b>q</b>. That is, the cardinality of the set SIM(<b>q</b>).</li>
  <li>Fetch payloads. On query vector <b>q</b>, return the payloads pld<sub>i</sub> for all <em>i</em> &isin; SIM(<b>q</b>).</li>
 </ul>
 
@@ -93,12 +93,13 @@ positional arguments:
 
 options:
   -h, --help           show this help message and exit
-  --num_runs NUM_RUNS  Number of times to run steps 4-9 (default: 1)
+  --num_runs NUM_RUNS  Number of times to run <a href="https://github.com/fhe-benchmarking/fetch-by-similarity/blob/b85401384b1e5e5f079beb42cceb2a424c4977ab/harness/run_submission.py#L109">steps 4-9</a> (default: 1)
   --seed SEED          Random seed for dataset and query generation
   --count_only         Only count # of matches, do not return payloads
   --remote             Run example submission in remote backend mode
 </code></pre>
 </div>
+You can find more details on the <a href="https://github.com/fhe-benchmarking/fetch-by-similarity">fetch-by-similarity Github repository</a>.
 
 <!-- --------------------------------------------------------------- -->
 <a name="promise"></a>
