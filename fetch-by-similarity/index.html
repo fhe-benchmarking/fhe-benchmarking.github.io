@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=us-ascii">
+<title>FHE Benchmarking: Fetch-by-Similarity Workload</title>
+<style>
+  .code-block {
+    padding-left: 40px; /* Adjust the value as needed (e.g., px, em, %) */
+    background-color: lightgray; /* Added for visual clarity */
+  }
+  .small-caps {
+    font-variant: small-caps;
+  }
+</style>
+</head>
+
+<body lang="EN-US">
+
+Repository is found at
+<a href="https://github.com/fhe-benchmarking/fetch-by-similarity">
+https://github.com/fhe-benchmarking/fetch-by-similarity</a>
+
+<h1>FHE Benchmarking: Fetch-by-Similarity Workload</h1>
+
+<h2>Results</h2>
+<ul>
+<li>Count matches:
+    <a href="Count-Small.html">Small</a>,
+    <a href="Count-Medium.html">Medium</a>,
+    <a href="Count-Large.html">Large</a>.
+</li>
+<li>Fetch payloads:
+    <a href="Fetch-Small.html">Small</a>,
+    <a href="Fetch-Medium.html">Medium</a>,
+    <a href="Fetch-Large.html">Large</a>.
+</li>
+</ul>
+
+<h2>Specification</h2>
+<p>The fetch-by-similarity workload implements a k-nearest-neighbor (kNN) vector-search functionality.
+The dataset is a key-value store with unit-length vectors as keys and arbitrary (short) bit-strings as payload values.
+The queries are also unit-length vectors, and the goal is to fetch a small number of payload values, corresponding to keys that are close to the query in terms of Cosine similarity.
+</p>
+
+<p>In more detail, denote the number of records in the dataset by <em>N</em>.
+Each record <em>i &isin; [N]</em> is of the form (<b>k</b><sub>i</sub>, pld<sub>i</sub>), with <b>k</b><sub>i</sub> &isin; R<sup>d</sup> a real vector normalized to &ell;<sub>2</sub>-norm of 1, and pld<sub>i</sub> &isin; {0,1}<sup>m</sup>.
+A query <b>q</b> &isin; R<sup>d</sup> is likewise normalized to &ell;<sub>2</sub>-norm of 1.
+The workload comes with a &quot;promise&quot; that there exist at most <em>t</em>=32 vectors <b>k</b><sub>i</sub> in the dataset with better than 0.8 Cosine-similarity to the query, and all other vectors
+are much less similar.
+(See <a href="#promise">below</a> for how this promise is implemented.)
+Specifically, there are at most <em>t</em> indexes <em>i</em> such that <b>q</b> &middot; <b>k</b><sub>i</sub> &gt; 0.8, and for all other records <b>q</b> &middot; <b>k</b><sub>i</sub> &lt; 0.8 (where `&middot;' denotes the dot product).
+Below we say that a vector <b>k</b><sub>i</sub> is similar to the query <b>q</b> if <b>q</b> &middot; <b>k</b><sub>i</sub>&gt; 0.8, and denote </p>
+
+<blockquote>
+SIM(<b>q</b>) = { i &isin; [N] : <b>q</b> &middot; <b>k</b><sub>i</sub> &gt; 0.8 }.
+</blockquote>
+
+<p>The workload includes two interfaces that benchmark submitters must implement: </p>
+
+<ul type="disc">
+ <li>Count matches. On query vector <b>q</b>, the answer is the number of similar vectors <b>q</b>. That is, the cardinality of the set SIM(<b>q</b>).</li>
+ <li>Fetch payloads. On query vector <b>q</b>, return the payloads pld<sub>i</sub> for all <em>i</em> &isin; SIM(<b>q</b>).</li>
+</ul>
+
+<p>The workload also specifies three different instance sizes, namely (<em>N,d,m</em>) tuples.
+The specification uses <em>m</em>=84 for the payload-size in all three instance sizes (but that setting is rather arbitrary, it just happens to be the bitlength supported by our reference code).
+It uses the following pairs of number-of-records <em>N</em> and dimension <em>d</em>:</p>
+
+<ul>
+ <li>Small: <em>N</em>=50,000 records with keys of dimension <em>d</em>=128.</li>
+ <li>Medium: <em>N</em>=1,000,000 records with keys dimension <em>d</em>=256.</li>
+ <li>Large: <em>N</em>=20,000,000 records with keys of dimension <em>d</em>=512.</li>
+</ul>
+Hence there are a total of six variants of this workload: Count matches and Fetch payloads, for each one of the three sizes.
+Submitters need not implement all six, instead each submitter can implement and report the results of any subset.
+
+<p>Submission to the benchmarking suite must set the implementation parameters so as to achieve security level of at least 128 bits (against a semi-honest server).
+Submitters must document their choice of parameters and explain why they believe that it meets the 128-bit security mandate.
+(For example, for LWE-based schemes without a sparse key, they can rely on Table 5.2 or Table 5.3 in the HE-security-guidelines document of Bossuat et al. <a href="#BCC24">[BCC+24]</a>.)</p>
+
+<p>The fetch-by-similarity harness contains a script that can be called to run the implementation of submitters, that script accepts command-line arguments to specify which interface of what instance size to run.</p>
+
+<div class="code-block">
+<pre><code>
+$ python3 harness/run_submission.py -h
+usage: run_submission.py [-h] [--num_runs NUM_RUNS] [--seed SEED] [--count_only] [--remote]
+                         {0,1,2,3}
+
+Run the fetch-by-similarity FHE benchmark.
+
+positional arguments:
+  {0,1,2,3}            Instance size (0-toy/1-small/2-medium/3-large)
+
+options:
+  -h, --help           show this help message and exit
+  --num_runs NUM_RUNS  Number of times to run steps 4-9 (default: 1)
+  --seed SEED          Random seed for dataset and query generation
+  --count_only         Only count # of matches, do not return payloads
+  --remote             Run example submission in remote backend mode
+</code></pre>
+</div>
+
+<!-- --------------------------------------------------------------- -->
+<a name="promise"></a>
+<h3>Implementing the Promise</h3>
+<details>
+<p>The fetch-by-similarity workload harness generates a synthetic dataset and
+queries at random, so that they meet the promise above with overwhelming
+probability. It begins by choosing a set of <em>c</em> = <em>N</em>/32
+&quot;centers&quot;, uniformly at random and independently on the dimension-<em>d</em>
+unit sphere (so with high probability they are nearly orthogonal to each other,
+see the analysis below). Denoting the resulting set of centers by (<b>c</b><sub>1</sub>,...,<b>c</b><sub>c</sub>), each one of the keys
+<b>k</b><sub>i</sub>, as well as the query vector <b>q</b>, is sampled using
+the Sample-point procedure below.</p>
+
+<div style='margin-left:10%; margin-right:10%;'>
+<div align="center" style='text-align:center'>
+<hr width="100%" align="center">
+</div>
+<p><b>Algorithm 1</b> The sampling procedure, returns either a random point or near one of the centers.
+</p>
+<div align="center" style='text-align:center'>
+<hr width="100%" align="center">
+</div>
+
+<p><b>procedure</b> <span class="small-caps">Sample-point</span>(<b>c</b><sub>1</sub>,...,<b>c</b><sub>c</sub>):
+&nbsp;&nbsp;<b>#</b> The <b>c</b><sub>j</sub>'s were chosen at random on the unit sphere
+<ol>
+<li> <b>r</b> &larr; a fresh random point on the unit sphere in R<sup>d</sup></li>
+<li> With probability 50% <b>return</b> <b>r</b></li>
+<li> Otherwise:<ol type="a">
+    <li>Choose a random index <em>j</em> &isin; {1,...,c}</li>
+    <li>Set <b>r</b> := <b>c</b><sub>j</sub> + 0.3 <b>r</b></li>
+    <li><b>return</b> <b>r</b>/|<b>r</b>|
+	&nbsp;&nbsp;<b>#</b> Normalize to unit length</li>
+    </ol></li>
+</ol>
+</div>
+
+<p>That procedure outputs an independent point on the unit sphere with
+probability 50%, and otherwise it samples a point near a randomly-chosen
+center <b>c</b><sub>j</sub>. Hence the dataset ends up having c clusters, each
+with expected size of 16 points, and N/2 other keys that are not in any of the
+clusters.</p>
+
+<p>Similarly, with probability 50% the query is near one of the centers (so is
+expected to have around 16 matches), and otherwise it is another random point
+on the unit sphere (and hence expected to have no matches at all).</p>
+
+<h3>Analysis of the Sampling Procedure</h3>
+
+<p>Below we show that points that are sampled near the same center are likely to have
+similarity of more than 0.9, while points that are not sampled near the same
+center are very unlikely to have similarity more than 0.7. </p>
+
+<h4>Upper bound for points not near the same center.</h4>
+
+<p>We start with an upper bound on the similarity between two uniform random
+points on the unit sphere. It is easy to see that the
+expected value of the inner product is O(1/<math xmlns="www.w3.org"><msqrt><mi>d</mi></msqrt></math>), reflecting the
+fact that two random unit vectors in high dimension are nearly orthogonal to
+each other. For a high-probability bound, we use the
+theorem below (whose proof can be found on StackExchange <a href="#Lue22">[Leu22]</a>):
+</p>
+
+<p><b>Theorem</b>:<em>
+Fix any <b>y</b> on the sphere
+S<sup>d-1</sup>= { <b>x</b> &isin; R<sup>d</sup>: |<b>x</b>|<sub>2</sub>=1 }.
+Let <b>z</b> be a random variable, uniformly distributed on S<sup>d-1</sup>. Then for any &epsilon; &isin; (0,1/<math xmlns="www.w3.org"><msqrt><mi>d</mi></msqrt></math>), it holds that</em>
+Pr[|<b>y</b><sup>T</sup><b>z</b>|&gt;&epsilon;] &nbsp;&leq;&nbsp; (1-&epsilon;<sup>2</sup>)<sup>d</sup><sup>/2</sup>.
+</p>
+
+<p>By symmetry, the probability Pr[<b>y</b><sup>T</sup><b>z</b>&gt;&epsilon;]
+(without the absolute value) is half of the expression above. Substituting
+&epsilon;=0.7 and setting <em>d</em>=128 (for the smallest instance), we get Pr[<b>y</b><sup>T</sup><b>z</b> &gt; 0.7]
+&nbsp;&leq;&nbsp; (1-0.7<sup>2</sup>)<sup>64</sup> / 2 &lt; 2<sup>-63</sup>.</p>
+
+<p>Below we plot the bound above against empirical results for &epsilon; &isin;
+[0.1,0.45], which we obtained by measuring the inner product of about 4e+9
+random points in dimension <em>d</em>=128. Similar calculations for the medium
+(<em>d</em>=256) and large (<em>d</em>=512) instances yield bounds below 2<sup>-125</sup>
+and 2<sup>-249</sup>, respectively.</p>
+
+<p><img src="prob-bound.png" alt="Bound vs. Empirical" width="480"><br>
+The bounds from Theorem 1 vs. empirical results for dimension <em>d</em>=128.</p>
+
+<h4>Empirical results for points near the same center.</h4>
+
+<p>Fixing an arbitrary unit-length center point <b>c</b>, we recall that points
+that are chosen near that center point have the form <b>v</b><sub>i</sub>=(<b>c</b>+<b>r</b><sub>i</sub>)/&ell;<sub>i</sub>, where <b>r</b><sub>i</sub> is a random
+point of length 0.3 and &ell;<sub>i</sub>=|<b>c</b>+<b>r</b><sub>i</sub>|.
+Since <b>r</b><sub>i</sub> is a random point on the 0.3-radius sphere, then it
+is nearly orthogonal to <b>c</b>, and therefore &ell;<sub>i</sub>=|<b>c</b>+<b>r</b><sub>i</sub>|
+&asymp; (1<sup>2</sup> + 0.3<sup>2</sup>)<sup>1/2</sup>
+= <math xmlns="www.w3.org"><msqrt><mn>1.009</mn></msqrt></math> &asymp; 1.044.
+For two such points <b>v</b><sub>1</sub>, <b>v</b><sub>2</sub>, the corresponding
+<b>r</b><sub>i</sub>'s are also nearly orthogonal to each other, hence</p>
+
+<p><b>v</b><sub>1</sub> &middot; <b>v</b><sub>2</sub> = (<b>c</b>+<b>r</b><sub>1</sub>)&ell;<sub>1</sub>
+&middot; (<b>c</b>+<b>r</b><sub>2</sub>)&ell;<sub>2</sub>
+= (1/&ell;<sub>1</sub>&ell;<sub>2</sub>) &middot; (|<b>c</b>|<sup>2</sup>+
+<b>r</b><sub>1</sub>&middot;<b>c</b>+<b>c</b>&middot;<b>r</b><sub>2</sub>+<b>r</b><sub>1</sub>&middot;<b>r</b><sub>2</sub>)
+&asymp; 1/1.044<sup>2</sup> &middot; 1 &asymp; 0.917 </p>
+
+<p>Indeed, experimental results confirm the above, with 1000 samples we
+observed an average similarity of 0.9163 and minimum similarity of 0.8945.</p>
+</details>
+<!-- ------------- end of Implementing the Promise -------------- -->
+
+<hr/>
+<h3>Bibliography</h3>
+<p><span id="BCC24" style="font-weight: bold;">[BCC+24]</span>
+<em>Security guidelines for implementing homomorphic encryption.</em>
+Jean-Philippe Bossuat, Rosario Cammarota, Ilaria Chillotti, Benjamin R. Curtis,
+Wei Dai, Huijing Gong, Erin Hales, Duhyeong Kim, Bryan Kumara, Changmin Lee,
+Xianhui Lu, Carsten Maple, Alberto Pedrouzo-Ulloa, Rachel Player, Yuriy Polyakov,
+Luis Antonio Ruiz Lopez, Yongsoo Song, and Donggeon Yhee.
+<a href="https://doi.org/10.62056/anxra69p1">IACR Communications in Cryptology, 1(4):26, 2024</a>.
+</p>
+<p>
+<span id="Lue22" style="font-weight: bold;">[Lue22]</span>
+<em>Concentration of measure on sphere: Bounding the probability of a large angle.</em>
+C. Leuridan.
+<a href="https://math.stackexchange.com/questions/4560617/">https://math.stackexchange.com/questions/4560617/</a>
+(version 2022-10-27).
+Based on an exercise in chapter 3 of <em>High-Dimensional Statistics: A Non-Asymptotic Viewpoint</em>
+by Martin J. Wainwright, Cambridge University Press, 2019.<br/>
+</p>
+</body>
+</html>

@@ -24,7 +24,7 @@ Each benchmark provides comprehensive metrics including:
 
 Each workload represents a real-world use case with clear specifications, reference implementations, and correctness requirements.
 
-- [**Fetch-by-Similarity**](https://github.com/fhe-benchmarking/fetch-by-similarity). Private database queries using cosine similarity search over encrypted data.
+- [**Fetch-by-Similarity**](./fetch-by-similarity/index.html). Private database queries using cosine similarity search over encrypted data.
 
 - [**ML Inference**](https://github.com/fhe-benchmarking/ml-inference). Privacy-preserving machine learning inference on encrypted inputs. Currently features MNIST digit classification, with other models to come.
 
@@ -63,7 +63,8 @@ When implementing one of the workloads from the benchmarking suite, submitters m
 
 1. Fork the relevant repository under [github.com/fhe-benchmarking](https://github.com/fhe-benchmarking)
 2. Replace the content of the `submission/` or `submission_remote/` subdirectories with their own implementation. Submitters must NOT change anything under the `harness` subdirectory. Any changes to the harness must be done by communicating with the benchmarking suite organizers.
-3. Update the README with all relevant information, and optionally provide more documentation in the `docs` subdirectory.
+3. Generate measurements files by (a) removing previous measurement files (if any) and then (b) running the harness with a `--num_runs 3` argument. This will place three files `results-<n>.json` at the subdirectory corresponding to the variant being measured. Once you measured all the variants that you want to submit, commit all these measurement files to your fork.
+4. Update the README with all relevant information, and optionally provide more documentation in the `docs` subdirectory.
 
 Once the submission is complete, submitters should inform the benchmarking suite organizers by filing [this Google form](https://docs.google.com/forms/d/e/1FAIpQLSdZfqKcBTbzWBIToidfJCEFGUDJhQUEnLO8m0NGAypLO0BC2Q/viewform), and make their fork of the relevant repository public. The organizers will then incorporate the performance results from that submission into a table of results for the relevant workload, and include in that table a link to the submitter's fork.
 
