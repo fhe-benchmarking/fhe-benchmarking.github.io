@@ -1,24 +1,129 @@
 <!DOCTYPE html>
-<html>
+<html lang="EN-US">
 <head>
-<meta http-equiv=Content-Type content="text/html; charset=us-ascii">
+<meta http-equiv="Content-Type" content="text/html; charset=us-ascii">
 <title>FHE Benchmarking: Fetch-by-Similarity Workload</title>
 <style>
-  .code-block {
-    padding-left: 40px; /* Adjust the value as needed (e.g., px, em, %) */
-    background-color: lightgray; /* Added for visual clarity */
-  }
-  .small-caps {
+    /* Layout and Typography */
+    body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    color: #2d3748;
+    max-width: 850px;
+    margin: 40px auto;
+    padding: 0 20px;
+    background-color: #ffffff;
+    }
+
+    h1 {
+    font-size: 2.25rem;
+    color: #1a202c;
+    border-bottom: 2px solid #e2e8f0;
+    }
+
+    h2 {
+    font-size: 1.5rem;
+    color: #2d3748;
+    border-bottom: 1px solid #edf2f7;
+    }
+
+    h3 {
+    font-size: 1.25rem;
+    margin-top: 1.5em;
+    }
+
+    /* Links */
+    a {
+    color: #3182ce;
+    text-decoration: none;
+    }
+    a:hover {
+    text-decoration: underline;
+    }
+
+    /* Colored Boxes */
+    .code-block {
+    padding: 15px;
+    background-color: #2d3748; /* Dark theme for code */
+    color: #edf2f7;
+    border-radius: 6px;
+    overflow-x: auto;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.9em;
+    margin: 10px 0;
+    }
+
+    .algorithm-box {
+    background-color: #f7fafc;
+    border: 1px solid #e2e8f0;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 25px 0;
+    }
+
+    blockquote {
+    background: #fffaf0; /* Warm highlight */
+    border-left: 5px solid #ed8936;
+    margin: 20px 0;
+    padding: 15px 20px;
+    font-style: italic;
+    }
+
+    /* Table Styling */
+    table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    }
+
+    th, td {
+    text-align: left;
+    padding: 12px;
+    border: 1px solid #e2e8f0;
+    }
+
+    th {
+    background-color: #f1f5f9;
+    font-weight: 600;
+    }
+
+    .small-caps {
     font-variant: small-caps;
-  }
+    }
+
+    details {
+    border: 1px solid #e2e8f0;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 20px 0;
+    }
+
+    summary {
+    font-weight: bold;
+    cursor: pointer;
+    outline: none;
+    }
+
+    .bib-entry {
+    margin-bottom: 15px;
+    }
+
+    .repository-link {
+    background: #edf2f7;
+    padding: 10px 15px;
+    border-radius: 5px;
+    display: inline-block;
+    }
+
 </style>
 </head>
 
-<body lang="EN-US">
+<body>
 
-Repository is found at
-<a href="https://github.com/fhe-benchmarking/fetch-by-similarity">
-https://github.com/fhe-benchmarking/fetch-by-similarity</a>
+<div class="repository-link">
+    <strong>Repository is found at </strong> 
+    <a href="https://github.com/fhe-benchmarking/fetch-by-similarity">github.com/fhe-benchmarking/fetch-by-similarity</a>
+</div>
 
 <h1>FHE Benchmarking: Fetch-by-Similarity Workload</h1>
 
@@ -41,6 +146,8 @@ https://github.com/fhe-benchmarking/fetch-by-similarity</a>
 The dataset is a key-value store with unit-length vectors as keys and arbitrary (short) bit-strings as payload values.
 The queries are also unit-length vectors, and the goal is to fetch a small number of payload values, corresponding to keys that are close to the query in terms of Cosine similarity.
 </p>
+
+
 
 <p>In more detail, denote the number of records in the dataset by <em>N</em>.
 Each record <em>i &isin; [N]</em> is of the form (<b>k</b><sub>i</sub>, pld<sub>i</sub>), with <b>k</b><sub>i</sub> &isin; R<sup>d</sup> a real vector normalized to &ell;<sub>2</sub>-norm of 1, and pld<sub>i</sub> &isin; {0,1}<sup>m</sup>.
@@ -66,13 +173,35 @@ SIM(<b>q</b>) = { i &isin; [N] : <b>q</b> &middot; <b>k</b><sub>i</sub> &gt; 0.8
 The specification uses <em>m</em>=84 for the payload-size in all three instance sizes (but that setting is rather arbitrary, it just happens to be the bitlength supported by our reference code).
 It uses the following pairs of number-of-records <em>N</em> and dimension <em>d</em>:</p>
 
-<ul>
- <li>Small: <em>N</em>=50,000 records with keys of dimension <em>d</em>=128.</li>
- <li>Medium: <em>N</em>=1,000,000 records with keys dimension <em>d</em>=256.</li>
- <li>Large: <em>N</em>=20,000,000 records with keys of dimension <em>d</em>=512.</li>
-</ul>
-Hence there are a total of six variants of this workload: Count matches and Fetch payloads, for each one of the three sizes.
-Submitters need not implement all six, instead each submitter can implement and report the results of any subset.
+<table>
+  <thead>
+    <tr>
+      <th>Size</th>
+      <th>Records (N)</th>
+      <th>Dimension (d)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Small</td>
+      <td>50,000</td>
+      <td>128</td>
+    </tr>
+    <tr>
+      <td>Medium</td>
+      <td>1,000,000</td>
+      <td>256</td>
+    </tr>
+    <tr>
+      <td>Large</td>
+      <td>20,000,000</td>
+      <td>512</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Hence there are a total of six variants of this workload: Count matches and Fetch payloads, for each one of the three sizes.
+Submitters need not implement all six, instead each submitter can implement and report the results of any subset.</p>
 
 <p>Submission to the benchmarking suite must set the implementation parameters so as to achieve security level of at least 128 bits (against a semi-honest server).
 Submitters must document their choice of parameters and explain why they believe that it meets the 128-bit security mandate.
@@ -93,7 +222,7 @@ positional arguments:
 
 options:
   -h, --help           show this help message and exit
-  --num_runs NUM_RUNS  Number of times to run <a href="https://github.com/fhe-benchmarking/fetch-by-similarity/blob/b85401384b1e5e5f079beb42cceb2a424c4977ab/harness/run_submission.py#L109">steps 4-9</a> (default: 1)
+  --num_runs NUM_RUNS  Number of times to run <a href="https://github.com/fhe-benchmarking/fetch-by-similarity/blob/b85401384b1e5e5f079beb42cceb2a424c4977ab/harness/run_submission.py#L109" style="color: #63b3ed;">steps 4-9</a> (default: 1)
   --seed SEED          Random seed for dataset and query generation
   --count_only         Only count # of matches, do not return payloads
   --remote             Run example submission in remote backend mode
@@ -101,10 +230,10 @@ options:
 </div>
 You can find more details on the <a href="https://github.com/fhe-benchmarking/fetch-by-similarity">fetch-by-similarity Github repository</a>.
 
-<!-- --------------------------------------------------------------- -->
 <a name="promise"></a>
 <h3>Implementing the Promise</h3>
 <details>
+<summary>Details</summary>
 <p>The fetch-by-similarity workload harness generates a synthetic dataset and
 queries at random, so that they meet the promise above with overwhelming
 probability. It begins by choosing a set of <em>c</em> = <em>N</em>/32
@@ -114,15 +243,10 @@ see the analysis below). Denoting the resulting set of centers by (<b>c</b><sub>
 <b>k</b><sub>i</sub>, as well as the query vector <b>q</b>, is sampled using
 the Sample-point procedure below.</p>
 
-<div style='margin-left:10%; margin-right:10%;'>
-<div align="center" style='text-align:center'>
-<hr width="100%" align="center">
-</div>
+<div class="algorithm-box">
 <p><b>Algorithm 1</b> The sampling procedure, returns either a random point or near one of the centers.
 </p>
-<div align="center" style='text-align:center'>
-<hr width="100%" align="center">
-</div>
+<hr width="100%">
 
 <p><b>procedure</b> <span class="small-caps">Sample-point</span>(<b>c</b><sub>1</sub>,...,<b>c</b><sub>c</sub>):
 &nbsp;&nbsp;<b>#</b> The <b>c</b><sub>j</sub>'s were chosen at random on the unit sphere
@@ -201,15 +325,15 @@ For two such points <b>v</b><sub>1</sub>, <b>v</b><sub>2</sub>, the correspondin
 &middot; (<b>c</b>+<b>r</b><sub>2</sub>)&ell;<sub>2</sub>
 = (1/&ell;<sub>1</sub>&ell;<sub>2</sub>) &middot; (|<b>c</b>|<sup>2</sup>+
 <b>r</b><sub>1</sub>&middot;<b>c</b>+<b>c</b>&middot;<b>r</b><sub>2</sub>+<b>r</b><sub>1</sub>&middot;<b>r</b><sub>2</sub>)
-&asymp; 1/1.044<sup>2</sup> &middot; 1 &asymp; 0.917 </p>
+&asymp; 1/1.044<sup>2</sup> &middot; 1 &asymp; 0.917</p>
 
 <p>Indeed, experimental results confirm the above, with 1000 samples we
 observed an average similarity of 0.9163 and minimum similarity of 0.8945.</p>
 </details>
-<!-- ------------- end of Implementing the Promise -------------- -->
 
 <hr/>
 <h3>Bibliography</h3>
+<div class="bib-entry">
 <p><span id="BCC24" style="font-weight: bold;">[BCC+24]</span>
 <em>Security guidelines for implementing homomorphic encryption.</em>
 Jean-Philippe Bossuat, Rosario Cammarota, Ilaria Chillotti, Benjamin R. Curtis,
@@ -218,6 +342,8 @@ Xianhui Lu, Carsten Maple, Alberto Pedrouzo-Ulloa, Rachel Player, Yuriy Polyakov
 Luis Antonio Ruiz Lopez, Yongsoo Song, and Donggeon Yhee.
 <a href="https://doi.org/10.62056/anxra69p1">IACR Communications in Cryptology, 1(4):26, 2024</a>.
 </p>
+</div>
+<div class="bib-entry">
 <p>
 <span id="Lue22" style="font-weight: bold;">[Lue22]</span>
 <em>Concentration of measure on sphere: Bounding the probability of a large angle.</em>
@@ -227,5 +353,6 @@ C. Leuridan.
 Based on an exercise in chapter 3 of <em>High-Dimensional Statistics: A Non-Asymptotic Viewpoint</em>
 by Martin J. Wainwright, Cambridge University Press, 2019.<br/>
 </p>
+</div>
 </body>
 </html>
