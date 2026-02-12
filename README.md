@@ -49,7 +49,7 @@ Core workload computation must be performed on encrypted data, though pre-proces
 For consistent comparisons, software-only submissions should be tested on similar platforms. Currently (2026) we recommend platforms with 5th-gen Intel Xeon (Emerald Rapids), with 96 vCPUs and ample memory. Examples of such platforms include EC2 I7ie.24xl, GCP c4-highmem-96, and Azure Standard-E96s-v6. (Submitters may want to use "metal" instances to avoid noisy-neighbor issues.) Submissions that rely on accelerated computing should specify the acceleration hardware used (e.g., number and type of GPUs).
 
 ## How to Submit Solutions
-<details>
+<details markdown="1">
 <summary>When implementing one of the workloads from the benchmarking suite, submitters must:</summary>
 
 1. Fork the relevant repository under [github.com/fhe-benchmarking](https://github.com/fhe-benchmarking)

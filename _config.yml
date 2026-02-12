@@ -1,2 +1,5 @@
 name: "FHE Benchmarking Suite"
 title: null
+markdown: kramdown
+kramdown:
+  parse_block_html: true
