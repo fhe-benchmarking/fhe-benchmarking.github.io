@@ -50,10 +50,7 @@ For consistent comparisons, software-only submissions should be tested on simila
 
 ## How to Submit Solutions
 
-<details markdown="1">
-<summary><span>When implementing one of the workloads from the benchmarking suite, submitters must:</span></summary>
-
-<div></div>
+When implementing one of the workloads from the benchmarking suite, submitters must:
 
 1. Fork the relevant repository under [github.com/fhe-benchmarking](https://github.com/fhe-benchmarking)
 2. Replace the content of the `submission/` or `submission_remote/` subdirectories with their own implementation. Submitters must NOT change anything under the `harness` subdirectory. Any changes to the harness must be done by communicating with the benchmarking suite organizers.
@@ -73,8 +70,6 @@ Submitters must update the README file with instructions on how to run their wor
 - If a backend is required, the README must include procedures for obtaining access to that backend. *Backends should remain available for at least a few weeks following initial submission* to allow result replication. Submitters are *not* required to provide access to everyone, but are expected to allow reasonable validation of their claimed performance.
 - The README must also include a description of how the solution works, FHE scheme(s) and parameters, and why this implementation enjoys at least 128-bit security. (Alternatively, the README can reference external documentation where this is described.)
 
-</details>
-
 ## Contact & Resources
 
 ### Get in Touch
@@ -89,4 +84,4 @@ Visit the Homomorphic Encryption Standardization community:
 
 ---
 
-[Code of Conduct](./CODE_OF_CONDUCT.html) | © 2026 [HomomorphicEncryption.org](https://homomorphicencryption.org) | Last updated 2026-02-11
+[Code of Conduct](./CODE_OF_CONDUCT.html) | © 2026 [HomomorphicEncryption.org](https://homomorphicencryption.org) | Last updated 2026-02-13
