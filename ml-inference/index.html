@@ -130,7 +130,7 @@
 <h2>Results - MNIST</h2>
 <ul>
 <li>Single Inference:
-    <a href="Single.html">Single Inference</a>.
+    <a href="Single.html">Single</a>.
 </li>
 <li>Batch Inference:
     <a href="Small.html">Small</a>,
@@ -175,14 +175,14 @@ The goal is to classify these images between 0 and 9 using encrypted ML Inferenc
   </tbody>
 </table>
 
-<p>Hence there are a total of four variants of this workload: single inference and batch inference for each one of the three sizes.
+<p>Hence, there are a total of four variants of this workload: single inference and batch inference for each one of the three sizes.
 Submitters need not implement all four, instead each submitter can implement and report the results of any subset.</p>
 
 <p>Submission to the benchmarking suite must set the implementation parameters so as to achieve security level of at least 128 bits (against a semi-honest server).
 Submitters must document their choice of parameters and explain why they believe that it meets the 128-bit security mandate.
 (For example, for LWE-based schemes without a sparse key, they can rely on Table 5.2 or Table 5.3 in the HE-security-guidelines document of Bossuat et al. <a href="#BCC24">[BCC+24]</a>.)</p>
 
-<p>Submissions are also required to meet the quality bar of correct inference result for single inference and at least 90% accuracy for batch inference.
+<p>Submissions are also required to meet the quality bar of <b>correct inference</b> result for single inference and <b>at least 90% accuracy</b> for batch inference.
 </p>
 
 
@@ -207,6 +207,9 @@ options:
   --remote             Run example submission in remote backend mode
 </code></pre>
 </div>
+
+<p>Note that in the future, this workload will be updated to support more models and more datasets.</p>
+
 You can find more details on the <a href="https://github.com/fhe-benchmarking/ml-inference">ml-inference Github repository</a>.
 
 
