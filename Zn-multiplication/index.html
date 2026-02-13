@@ -142,16 +142,17 @@
 <h2>Specification</h2>
 <p>The Zn-multiplication workload implements an encrypted multiplication functionality.
 The input is a collection of integer pairs modulo n. 
-The goal is to perform multiplication on these integers using homomorphic encryption.
+The goal is to perform multiplication of these integers using homomorphic encryption.
 Currently we support n=64, and we may expand to other values of n in the future.
+Such 64-bit encrypted integer multiplications are essential to blockchain applications.
 
 </p>
 
 <p>The workload includes two interfaces for benchmark submitters to implement: </p>
 
 <ul type="disc">
- <li>Single Multiplication: On single pair of integers. The submitter is expected to implement the multiplication functionality for a single input pair.</li>
- <li>Batched Multiplication: On batch of input integer pairs. The submitter is expected to implement the multiplication functionality for a batch of input pairs. This can be more efficient than single multiplication for large datasets leveraging parallelism.</li>
+ <li>Single Multiplication: On a single pair of integers, submitters are expected to implement the multiplication functionality for a single input pair and return a single integer.</li>
+ <li>Batched Multiplication: On a batch of input integer pairs, the submitters are expected to implement the multiplication functionality for a batch of input pairs and return a vector of integers of the batch size. This can be more efficient than single multiplication for large datasets leveraging parallelism.</li>
 </ul>
 
 <table>
@@ -177,7 +178,7 @@ Currently we support n=64, and we may expand to other values of n in the future.
   </tbody>
 </table>
 
-<p>Hence there are a total of four variants of this workload: single inference and batch inference for each one of the three sizes.
+<p>Hence, there are a total of four variants of this workload: single inference and batch inference for each one of the three sizes.
 Submitters need not implement all four, instead each submitter can implement and report the results of any subset.</p>
 
 <p>Submission to the benchmarking suite must set the implementation parameters so as to achieve security level of at least 128 bits (against a semi-honest server).
