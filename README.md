@@ -28,7 +28,7 @@ Each workload represents a real-world use case with clear specifications, refere
 
 - [**ML Inference**](https://github.com/fhe-benchmarking/ml-inference). Privacy-preserving machine learning inference on encrypted inputs. Currently features MNIST digit classification, with other models to come.
 
-- [**Zn Multiplication**](https://github.com/fhe-benchmarking/Zn-multiplication). Multiplication of two encrypted 64-bit encrypted integers. Other bit-sizes for the multiplicands will be added.
+- [**Zn Multiplication**](./Zn-multiplication/index.html). Multiplication of two encrypted 64-bit encrypted integers. Other bit-sizes for the multiplicands will be added.
 
 *Additional workloads are under development. Check back for updates.*
 

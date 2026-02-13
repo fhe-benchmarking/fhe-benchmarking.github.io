@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="EN-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=us-ascii">
+<title>FHE Benchmarking: Zn-multiplication Workload</title>
+<style>
+    /* Layout and Typography */
+    body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    color: #2d3748;
+    max-width: 850px;
+    margin: 40px auto;
+    padding: 0 20px;
+    background-color: #ffffff;
+    }
+
+    h1 {
+    font-size: 2.25rem;
+    color: #1a202c;
+    border-bottom: 2px solid #e2e8f0;
+    }
+
+    h2 {
+    font-size: 1.5rem;
+    color: #2d3748;
+    border-bottom: 1px solid #edf2f7;
+    }
+
+    h3 {
+    font-size: 1.25rem;
+    margin-top: 1.5em;
+    }
+
+    /* Links */
+    a {
+    color: #3182ce;
+    text-decoration: none;
+    }
+    a:hover {
+    text-decoration: underline;
+    }
+
+    /* Colored Boxes */
+    .code-block {
+    padding: 15px;
+    background-color: #2d3748; /* Dark theme for code */
+    color: #edf2f7;
+    border-radius: 6px;
+    overflow-x: auto;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.9em;
+    margin: 10px 0;
+    }
+
+    .algorithm-box {
+    background-color: #f7fafc;
+    border: 1px solid #e2e8f0;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 25px 0;
+    }
+
+    blockquote {
+    background: #fffaf0; /* Warm highlight */
+    border-left: 5px solid #ed8936;
+    margin: 20px 0;
+    padding: 15px 20px;
+    font-style: italic;
+    }
+
+    /* Table Styling */
+    table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    }
+
+    th, td {
+    text-align: left;
+    padding: 12px;
+    border: 1px solid #e2e8f0;
+    }
+
+    th {
+    background-color: #f1f5f9;
+    font-weight: 600;
+    }
+
+    .small-caps {
+    font-variant: small-caps;
+    }
+
+    details {
+    border: 1px solid #e2e8f0;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 20px 0;
+    }
+
+    summary {
+    font-weight: bold;
+    cursor: pointer;
+    outline: none;
+    }
+
+    .bib-entry {
+    margin-bottom: 15px;
+    }
+
+    .repository-link {
+    background: #edf2f7;
+    padding: 10px 15px;
+    border-radius: 5px;
+    display: inline-block;
+    }
+
+</style>
+</head>
+
+<body>
+
+<div class="repository-link">
+    <strong>Repository is found at</strong>
+    <a href="https://github.com/fhe-benchmarking/Zn-multiplication">github.com/fhe-benchmarking/Zn-multiplication</a>
+</div>
+
+<h1>FHE Benchmarking: Zn-Multiplication Workload</h1>
+
+<h2>Results</h2>
+<ul>
+<li>Single Multiplication:
+    <a href="Single.html">Single</a>.
+</li>
+<li>Batch Multiplication:
+    <a href="Small.html">Small</a>,
+    <a href="Medium.html">Medium</a>,
+    <a href="Large.html">Large</a>.
+</li>
+</ul>
+
+<h2>Specification</h2>
+<p>The Zn-multiplication workload implements an encrypted multiplication functionality.
+The input is a collection of integer pairs modulo n. 
+The goal is to perform multiplication on these integers using homomorphic encryption.
+Currently we support n=64, and we may expand to other values of n in the future.
+
+</p>
+
+<p>The workload includes two interfaces for benchmark submitters to implement: </p>
+
+<ul type="disc">
+ <li>Single Multiplication: On single pair of integers. The submitter is expected to implement the multiplication functionality for a single input pair.</li>
+ <li>Batched Multiplication: On batch of input integer pairs. The submitter is expected to implement the multiplication functionality for a batch of input pairs. This can be more efficient than single multiplication for large datasets leveraging parallelism.</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>Size</th>
+      <th>Records (N)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Small</td>
+      <td>1000</td>
+    </tr>
+    <tr>
+      <td>Medium</td>
+      <td>100,000</td>
+    </tr>
+    <tr>
+      <td>Large</td>
+      <td>10,000,000</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Hence there are a total of four variants of this workload: single inference and batch inference for each one of the three sizes.
+Submitters need not implement all four, instead each submitter can implement and report the results of any subset.</p>
+
+<p>Submission to the benchmarking suite must set the implementation parameters so as to achieve security level of at least 128 bits (against a semi-honest server).
+Submitters must document their choice of parameters and explain why they believe that it meets the 128-bit security mandate.
+(For example, for LWE-based schemes without a sparse key, they can rely on Table 5.2 or Table 5.3 in the HE-security-guidelines document of Bossuat et al. <a href="#BCC24">[BCC+24]</a>.)</p>
+
+<p>All submissions must also ensure the correctness of their output with full precision.
+</p>
+
+
+<p>The Zn-multiplication harness contains a script that can be called to run the implementation of submitters, that script accepts command-line arguments to specify which interface of what instance size to run.</p>
+
+<div class="code-block">
+<pre><code>
+$ python3 harness/run_submission.py -h
+usage: run_submission.py [-h] [--num_runs NUM_RUNS] [--seed SEED] [--count_only] [--remote]
+                         {0,1,2,3}
+
+Run the Zn-multiplication FHE benchmark.
+
+positional arguments:
+  {0,1,2,3}            Instance size (0-single/1-small/2-medium/3-large)
+
+options:
+  -h, --help           show this help message and exit
+  --num_runs NUM_RUNS  Number of times to run <a href="https://github.com/fhe-benchmarking/Zn-multiplication/blob/main/harness/run_submission.py#L109" style="color: #63b3ed;">steps 4-9</a> (default: 1)
+  --seed SEED          Random seed for dataset and query generation
+</code></pre>
+</div>
+You can find more details on the <a href="https://github.com/fhe-benchmarking/Zn-multiplication">Zn-multiplication Github repository</a>.
+
+
+<hr/>
+<h3>Bibliography</h3>
+<div class="bib-entry">
+<p><span id="BCC24" style="font-weight: bold;">[BCC+24]</span>
+<em>Security guidelines for implementing homomorphic encryption.</em>
+Jean-Philippe Bossuat, Rosario Cammarota, Ilaria Chillotti, Benjamin R. Curtis,
+Wei Dai, Huijing Gong, Erin Hales, Duhyeong Kim, Bryan Kumara, Changmin Lee,
+Xianhui Lu, Carsten Maple, Alberto Pedrouzo-Ulloa, Rachel Player, Yuriy Polyakov,
+Luis Antonio Ruiz Lopez, Yongsoo Song, and Donggeon Yhee.
+<a href="https://doi.org/10.62056/anxra69p1">IACR Communications in Cryptology, 1(4):26, 2024</a>.
+</p>
+</div>
+</body>
+</html>
