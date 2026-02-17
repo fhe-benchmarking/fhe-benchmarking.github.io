@@ -88,7 +88,7 @@ Andreea Alexandru, Flavio Bergamaschi, Shruthi Gorantala, Shai Halevi
 ### Participants
 | | | | | |
 | :---: | :---: | :---: | :---: | :---: |
-| <img src="images/aws-logo.png" height="60"> | <img src="images/google-logo.png" height="60"> | <img src="images/duality_logo.png" height="60"> | <img src="images/optalysis_logo.png" height="60"> |  <img src="images/lattica_logo.jpg" height="60"> |
+| <img src="images/aws-logo.png" height="60"> | <img src="images/google-logo.png" height="60"> | <img src="images/duality_logo.png" height="50"> | <img src="images/optalysis_logo.png" height="60"> |  <img src="images/lattica_logo.jpg" height="70"> |
 ---
 
 [Code of Conduct](./CODE_OF_CONDUCT.html) | © 2026 [HomomorphicEncryption.org](https://homomorphicencryption.org) | Last updated 2026-02-13
