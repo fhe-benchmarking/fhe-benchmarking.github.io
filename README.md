@@ -88,7 +88,7 @@ Andreea Alexandru, Flavio Bergamaschi, Shruthi Gorantala, Shai Halevi
 ### Contributors
 | | | | | |
 | :---: | :---: | :---: | :---: | :---: |
-| ![Logo AWS](images/aws-logo.png) | ![Logo Google](images/google-logo.png) | ![Logo Duality](images/duality-logo.png) | ![Logo Optalysis](images/optalysis-logo.png) |  ![Logo Lattica](images/lattica-logo.png) |
+| <img src="images/aws-logo.png" height="50"> | <img src="images/google-logo.png" height="50"> | <img src="images/duality-logo.png" height="38"> | <img src="images/optalysis-logo.png" height="50"> |  <img src="images/lattica-logo.png" height="40"> |
 ---
 
 [Code of Conduct](./CODE_OF_CONDUCT.html) | © 2026 [HomomorphicEncryption.org](https://homomorphicencryption.org) | Last updated 2026-02-19
