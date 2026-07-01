@@ -30,6 +30,8 @@ Each workload represents a real-world use case with clear specifications, refere
 
 - [**Zn Multiplication**](./Zn-multiplication/index.html). Multiplication of two encrypted 64-bit encrypted integers. Other bit-sizes for the multiplicands will be added.
 
+- [**BERT**](./BERT/index.html). Privacy-preserving BERT inference on encrypted inputs. Currently supports [BERT-Base (110M)](https://huggingface.co/google-bert/bert-base-cased-finetuned-mrpc) inference on the MRPC task in the [GLUE benchmark](https://gluebenchmark.com/).
+
 *Additional workloads are under development. Check back for updates.*
 
 ## Suite Structure
