@@ -140,7 +140,7 @@
 </ul>
 
 <h2>Specification</h2>
-<p>The BERT workload implements an encrypted inference functionality.
+<p>The BERT workload implements an encrypted inference functionality for the MRPC task in the <a href="https://gluebenchmark.com/">GLUE benchmark</a>.
 The input consists of a pair of sentences, both drawn from online news sources. Each pair was originally extracted automatically and then annotated by humans.
 The goal is a binary classification: determine whether the two sentences in the pair are semantically equivalent. So for each sentence pair, the model outputs a label indicating "equivalent" or "not equivalent."
 </p>
@@ -186,7 +186,7 @@ Submitters must document their choice of parameters and explain why they believe
 </p>
 
 
-<p>The BERT harness contains a script that can be called to run the implementation of submitters, that script accepts command-line arguments to specify which interface of what instance size to run. The harness currently supports [BERT-Base (110M)](https://huggingface.co/google-bert/bert-base-cased-finetuned-mrpc) inference on the MRPC task in the [GLUE benchmark](https://gluebenchmark.com/). In the future, this workload may be updated to support more models and more datasets.</p>
+<p>The BERT harness contains a script that can be called to run the implementation of submitters, that script accepts command-line arguments to specify which interface of what instance size to run. The harness currently supports <a href="https://huggingface.co/google-bert/bert-base-cased-finetuned-mrpc">BERT-Base (110M)</a> inference on the MRPC task in the <a href="https://gluebenchmark.com/">GLUE benchmark</a>. In the future, this workload may be updated to support more models and more datasets.</p>
 
 <div class="code-block">
 <pre><code>
