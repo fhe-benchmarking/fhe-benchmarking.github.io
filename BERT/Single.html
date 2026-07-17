@@ -31,7 +31,7 @@
     <table id="resultsTable" class="display">
         <thead>
             <tr>
-                <th colspan="4">Submitter</th> <th class="divider"></th> <th colspan="3">Bandwidth</th> <th class="divider"></th> <th colspan="9">Timing (harness)</th> <th class="divider"></th> <th colspan="9">Timing (server)</th>
+                <th colspan="4">Submitter</th> <th class="divider"></th> <th colspan="3">Bandwidth</th> <th class="divider"></th> <th colspan="9">Timing (harness)</th> <th class="divider"></th> <th colspan="10">Timing (server)</th>
             </tr>
             <tr><th id="col0" class="submitter-header" title="Submitter Name">Name</th>
     <th id="col1" class="submitter-header" title="Submission Date">Date</th>
@@ -53,17 +53,24 @@
     <th id="col17" class="harness-timing-header" title="Result decryption and postprocessing">Decrypt</th>
     <th id="col18" class="divider"></th>
     <th id="col19" class="server-timing-header" title="Total Time">Total</th>
-    <th id="col20" class="server-timing-header" title="Dataset generation">DB Gen</th>
-    <th id="col21" class="server-timing-header" title="Key Generation">Keygen</th>
-    <th id="col22" class="server-timing-header" title="Encrypted model preprocessing">Model Prep</th>
-    <th id="col23" class="server-timing-header" title="Input generation">Input Gen</th>
-    <th id="col24" class="server-timing-header" title="Input preprocessing">Input Prep</th>
-    <th id="col25" class="server-timing-header" title="Input encryption">Input Enc</th>
-    <th id="col26" class="server-timing-header" title="Encrypted computation">Compute</th>
-    <th id="col27" class="server-timing-header" title="Result decryption and postprocessing">Decrypt</th>
+    <th id="col20" class="server-timing-header" title="Server-reported I/O time">I/O</th>
+    <th id="col21" class="server-timing-header" title="Dataset generation">DB Gen</th>
+    <th id="col22" class="server-timing-header" title="Key Generation">Keygen</th>
+    <th id="col23" class="server-timing-header" title="Encrypted model preprocessing">Model Prep</th>
+    <th id="col24" class="server-timing-header" title="Input generation">Input Gen</th>
+    <th id="col25" class="server-timing-header" title="Input preprocessing">Input Prep</th>
+    <th id="col26" class="server-timing-header" title="Input encryption">Input Enc</th>
+    <th id="col27" class="server-timing-header" title="Encrypted computation">Compute</th>
+    <th id="col28" class="server-timing-header" title="Result decryption and postprocessing">Decrypt</th>
             </tr>
         </thead>
         <tbody>
+            <tr>
+                <td><a href="https://github.com/fhe-benchmarking/BERT">Reference</a></td><td>2026&#8209;07&#8209;08 16:29:03</td><td>CPU</td><td>L</td><td class="divider"></td><td>21.4G</td><td>46M</td><td>30M</td><td class="divider"></td><td>41.83m</td><td>4.7787s</td><td>51.62s</td><td>3.2822s</td><td>4.8859s</td><td>3.6352s</td><td>3.9553s</td><td>40.62m</td><td>633.3ms</td><td class="divider"></td><td>40.24m</td><td>58.37s</td><td></td><td></td><td></td><td></td><td></td><td></td><td>39.27m</td><td></td>
+            </tr>
+            <tr>
+                <td><a href="https://github.com/Desilo/BERT">DESILO</a></td><td>2026&#8209;07&#8209;14 02:04:17</td><td>GPU</td><td>L</td><td class="divider"></td><td>21.4G</td><td>46M</td><td>30M</td><td class="divider"></td><td>14.16m</td><td>11.16s</td><td>57.78s</td><td>7.0413m</td><td>13.9s</td><td>11.01s</td><td>12.3s</td><td>5.3337m</td><td>1.1814s</td><td class="divider"></td><td>4.9873m</td><td>2.9696m</td><td></td><td></td><td></td><td></td><td></td><td></td><td>2.0177m</td><td></td>
+            </tr>
         </tbody>
     </table>
 
@@ -76,7 +83,7 @@
                     columns: ':not(.no-toggle)'
                 }],
                 columnDefs: [
-                    { targets: [10, 12, 14, 20, 21, 23, 24, 25, 27], visible: false },
+                    { targets: [10, 14, 21, 22, 23, 24, 25, 26, 28], visible: false },
                     { targets: [0, 1, 2, 3, 4, 6, 8, 9, 18], className: 'no-toggle' },
                     { targets: [4, 8, 18], orderable: false, searchable: false, className: 'divider' }
                 ],
