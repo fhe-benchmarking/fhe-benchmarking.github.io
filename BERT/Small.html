@@ -31,7 +31,7 @@
     <table id="resultsTable" class="display">
         <thead>
             <tr>
-                <th colspan="4">Submitter</th> <th class="divider"></th> <th colspan="3">Bandwidth</th> <th class="divider"></th> <th colspan="1">Quality</th> <th class="divider"></th> <th colspan="9">Timing (harness)</th> <th class="divider"></th> <th colspan="9">Timing (server)</th>
+                <th colspan="4">Submitter</th> <th class="divider"></th> <th colspan="3">Bandwidth</th> <th class="divider"></th> <th colspan="1">Quality</th> <th class="divider"></th> <th colspan="9">Timing (harness)</th> <th class="divider"></th> <th colspan="10">Timing (server)</th>
             </tr>
             <tr><th id="col0" class="submitter-header" title="Submitter Name">Name</th>
     <th id="col1" class="submitter-header" title="Submission Date">Date</th>
@@ -55,17 +55,24 @@
     <th id="col19" class="harness-timing-header" title="Result decryption and postprocessing">Decrypt</th>
     <th id="col20" class="divider"></th>
     <th id="col21" class="server-timing-header" title="Total Time">Total</th>
-    <th id="col22" class="server-timing-header" title="Dataset generation">DB Gen</th>
-    <th id="col23" class="server-timing-header" title="Key Generation">Keygen</th>
-    <th id="col24" class="server-timing-header" title="Encrypted model preprocessing">Model Prep</th>
-    <th id="col25" class="server-timing-header" title="Input generation">Input Gen</th>
-    <th id="col26" class="server-timing-header" title="Input preprocessing">Input Prep</th>
-    <th id="col27" class="server-timing-header" title="Input encryption">Input Enc</th>
-    <th id="col28" class="server-timing-header" title="Encrypted computation">Compute</th>
-    <th id="col29" class="server-timing-header" title="Result decryption and postprocessing">Decrypt</th>
+    <th id="col22" class="server-timing-header" title="Server-reported I/O time">I/O</th>
+    <th id="col23" class="server-timing-header" title="Dataset generation">DB Gen</th>
+    <th id="col24" class="server-timing-header" title="Key Generation">Keygen</th>
+    <th id="col25" class="server-timing-header" title="Encrypted model preprocessing">Model Prep</th>
+    <th id="col26" class="server-timing-header" title="Input generation">Input Gen</th>
+    <th id="col27" class="server-timing-header" title="Input preprocessing">Input Prep</th>
+    <th id="col28" class="server-timing-header" title="Input encryption">Input Enc</th>
+    <th id="col29" class="server-timing-header" title="Encrypted computation">Compute</th>
+    <th id="col30" class="server-timing-header" title="Result decryption and postprocessing">Decrypt</th>
             </tr>
         </thead>
         <tbody>
+            <tr>
+                <td><a href="https://github.com/fhe-benchmarking/BERT">Reference</a></td><td>2026&#8209;07&#8209;08 16:29:03</td><td>CPU</td><td>L</td><td class="divider"></td><td>21.4G</td><td>4.5G</td><td>2.9G</td><td class="divider"></td><td>0.82</td><td class="divider"></td><td>18.55h</td><td>5.9304s</td><td>51.6s</td><td>3.2842s</td><td>4.924s</td><td>3.631s</td><td>24.59s</td><td>18.51h</td><td>36.9s</td><td class="divider"></td><td>73.64h</td><td>1.4911h</td><td></td><td></td><td></td><td></td><td></td><td></td><td>72.15h</td><td></td>
+            </tr>
+            <tr>
+                <td><a href="https://github.com/Desilo/BERT">DESILO</a></td><td>2026&#8209;07&#8209;14 02:04:17</td><td>GPU</td><td>L</td><td class="divider"></td><td>21.4G</td><td>4.5G</td><td>2.9G</td><td class="divider"></td><td>0.8433</td><td class="divider"></td><td>6.5355h</td><td>10.59s</td><td>55.82s</td><td>4.8139m</td><td>8.1301s</td><td>5.8594s</td><td>51.31s</td><td>6.3955h</td><td>1.1634m</td><td class="divider"></td><td>6.3747h</td><td>3.0577h</td><td></td><td></td><td></td><td></td><td></td><td></td><td>3.317h</td><td></td>
+            </tr>
         </tbody>
     </table>
 
@@ -78,7 +85,7 @@
                     columns: ':not(.no-toggle)'
                 }],
                 columnDefs: [
-                    { targets: [12, 14, 16, 22, 23, 25, 26, 27, 29], visible: false },
+                    { targets: [12, 16, 23, 24, 25, 26, 27, 28, 30], visible: false },
                     { targets: [0, 1, 2, 3, 4, 6, 8, 10, 11, 20], className: 'no-toggle' },
                     { targets: [4, 8, 10, 20], orderable: false, searchable: false, className: 'divider' }
                 ],
