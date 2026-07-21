@@ -188,6 +188,8 @@ Submitters must document their choice of parameters and explain why they believe
 
 <p>The BERT harness contains a script that can be called to run the implementation of submitters, that script accepts command-line arguments to specify which interface of what instance size to run. The harness currently supports <a href="https://huggingface.co/google-bert/bert-base-cased-finetuned-mrpc">BERT-Base (110M)</a> inference on the MRPC task in the <a href="https://gluebenchmark.com/">GLUE benchmark</a>. In the future, this workload may be updated to support more models and more datasets.</p>
 
+Encrypted inference for Transformer architectures like BERT can be implemented in various ways on various backends. Currently, the harness follows the method of the paper named THOR <a href="#MYJK25">[MYJK25]</a> and uses the <a href="https://fhe.desilo.dev/">DESILO FHE library</a> as the backend.
+
 <div class="code-block">
 <pre><code>
 $ python3 harness/run_submission.py -h
@@ -222,5 +224,13 @@ Luis Antonio Ruiz Lopez, Yongsoo Song, and Donggeon Yhee.
 <a href="https://doi.org/10.62056/anxra69p1">IACR Communications in Cryptology, 1(4):26, 2024</a>.
 </p>
 </div>
+<div class="bib-entry">
+<p><span id="MYJK25" style="font-weight: bold;">[MYJK25]</span>
+<em>THOR: Secure Transformer Inference with Homomorphic Encryption.</em>
+Jungho Moon, Dongwoo Yoo, Xiaoqian Jiang, Miran Kim.
+<a href="https://doi.org/10.1145/3719027.3765150">ACM SIGSAC Conference on Computer and Communications Security, pp. 3765-3779, 2025</a>.
+</p>
+</div>
+
 </body>
 </html>
