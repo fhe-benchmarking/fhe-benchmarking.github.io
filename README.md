@@ -88,9 +88,14 @@ Visit the Homomorphic Encryption Standardization community:
 Andreea Alexandru, Flavio Bergamaschi, Shruthi Gorantala, Shai Halevi
 
 ### Contributors
-| | | | | | |
-| :---: | :---: | :---: | :---: | :---: | :---: |
-| <img src="images/aws-logo.png" height="50"> | <img src="images/google-logo.png" height="50"> | <img src="images/duality-logo.png" height="38"> | <img src="images/optalysis-logo.png" height="50"> |  <img src="images/lattica-logo.png" height="40"> | <img src="images/desilo-logo.png" height="50"> |
+| | | | |
+| :---: | :---: | :---: | :---: |
+| <img src="images/aws-logo.png" height="50"> | <img src="images/google-logo.png" height="50"> | <img src="images/duality-logo.png" height="38"> | <img src="images/optalysis-logo.png" height="50"> |
+
+| | |
+| :---: | :---: |
+|  <img src="images/lattica-logo.png" height="45"> | <img src="images/desilo-logo.png" height="30"> |
+
 ---
 
 [Code of Conduct](./CODE_OF_CONDUCT.html) | © 2026 [HomomorphicEncryption.org](https://homomorphicencryption.org) | Last updated 2026-02-19
