@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="EN-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=us-ascii">
+<title>FHE Benchmarking: Face Recognition Workload</title>
+<style>
+    /* Layout and Typography */
+    body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    color: #2d3748;
+    max-width: 850px;
+    margin: 40px auto;
+    padding: 0 20px;
+    background-color: #ffffff;
+    }
+
+    h1 {
+    font-size: 2.25rem;
+    color: #1a202c;
+    border-bottom: 2px solid #e2e8f0;
+    }
+
+    h2 {
+    font-size: 1.5rem;
+    color: #2d3748;
+    border-bottom: 1px solid #edf2f7;
+    }
+
+    h3 {
+    font-size: 1.25rem;
+    margin-top: 1.5em;
+    }
+
+    /* Links */
+    a {
+    color: #3182ce;
+    text-decoration: none;
+    }
+    a:hover {
+    text-decoration: underline;
+    }
+
+    /* Colored Boxes */
+    .code-block {
+    padding: 15px;
+    background-color: #2d3748; /* Dark theme for code */
+    color: #edf2f7;
+    border-radius: 6px;
+    overflow-x: auto;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.9em;
+    margin: 10px 0;
+    }
+
+    .algorithm-box {
+    background-color: #f7fafc;
+    border: 1px solid #e2e8f0;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 25px 0;
+    }
+
+    blockquote {
+    background: #fffaf0; /* Warm highlight */
+    border-left: 5px solid #ed8936;
+    margin: 20px 0;
+    padding: 15px 20px;
+    font-style: italic;
+    }
+
+    /* Table Styling */
+    table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    }
+
+    th, td {
+    text-align: left;
+    padding: 12px;
+    border: 1px solid #e2e8f0;
+    }
+
+    th {
+    background-color: #f1f5f9;
+    font-weight: 600;
+    }
+
+    .small-caps {
+    font-variant: small-caps;
+    }
+
+    details {
+    border: 1px solid #e2e8f0;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 20px 0;
+    }
+
+    summary {
+    font-weight: bold;
+    cursor: pointer;
+    outline: none;
+    }
+
+    .bib-entry {
+    margin-bottom: 15px;
+    }
+
+    .repository-link {
+    background: #edf2f7;
+    padding: 10px 15px;
+    border-radius: 5px;
+    display: inline-block;
+    }
+
+</style>
+</head>
+
+<body>
+
+<div class="repository-link">
+    <strong>Repository is found at</strong>
+    <a href="https://github.com/fhe-benchmarking/face-recognition">github.com/fhe-benchmarking/face-recognition</a>
+</div>
+
+<h1>FHE Benchmarking: Face Recognition Workload</h1>
+
+<h2>Results - CelebA face verification</h2>
+<ul>
+<li>Single Inference:
+    <a href="Single.html">Single</a>.
+</li>
+<li>Batch Inference:
+    <a href="Small.html">Small</a>,
+    <a href="Medium.html">Medium</a>,
+    <a href="Large.html">Large</a>.
+</li>
+</ul>
+
+<h2>Specification</h2>
+<p>The face recognition workload implements an encrypted <em>face verification</em> functionality.
+The input is a pair of in-the-wild face images drawn from the <a href="https://mmlab.ie.cuhk.edu.hk/projects/CelebA.html">CelebA</a> dataset.
+The goal is a binary decision: determine whether the two images depict the <em>same</em> person (a genuine pair) or two <em>different</em> people (an impostor pair).
+For each pair the model computes, under homomorphic encryption, a similarity score between the two faces; only that score is decrypted. A genuine/impostor decision corresponds to thresholding this score, and the harness evaluates quality by sweeping thresholds to compute the Equal Error Rate and TAR@FAR (see below).
+</p>
+
+<p>The workload includes two interfaces for benchmark submitters to implement: </p>
+
+<ul type="disc">
+ <li>Single Inference: On a single pair of face images. The submitter is expected to implement the verification functionality for one pair.</li>
+ <li>Batched Inference: On a batch of face-image pairs. The submitter is expected to implement the verification functionality for a batch of pairs. This can be more efficient than single inference for large datasets leveraging parallelism.</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>Size</th>
+      <th>Pairs (N)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Small</td>
+      <td>128</td>
+    </tr>
+    <tr>
+      <td>Medium</td>
+      <td>256</td>
+    </tr>
+    <tr>
+      <td>Large</td>
+      <td>1,024</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Each variant samples <span class="small-caps">N</span> pairs from a fixed master set of 1,024 screened CelebA pairs (512 genuine, 512 impostor); the Large variant uses the full set.
+Hence, there are a total of four variants of this workload: single inference and batch inference for each one of the three sizes.
+Submitters need not implement all four, instead each submitter can implement and report the results of any subset.</p>
+
+<p>Submission to the benchmarking suite must set the implementation parameters so as to achieve security level of at least 128 bits (against a semi-honest server).
+Submitters must document their choice of parameters and explain why they believe that it meets the 128-bit security mandate.
+The reference CryptoFace submission uses RNS-CKKS with ring dimension N = 2<sup>16</sup> and a sparse ternary secret (Hamming weight 192); its parameter selection and security analysis are described in <a href="#AB25">[AB25]</a>.</p>
+
+<p>Submissions are also required to meet a quality bar defined relative to a plaintext <a href="https://arxiv.org/abs/1801.07698">ArcFace</a> <a href="#DGX19">[DGX+19]</a> baseline that the harness evaluates on the same sampled pairs.
+For batched inference, the encrypted model's <a href="https://en.wikipedia.org/wiki/Biometrics#Performance">Equal Error Rate (EER)</a> must be <b>no more than 0.15 above</b> the ArcFace baseline EER on the same pairs.
+EER is used because it is threshold-free and stable across batch sizes; the harness additionally reports the True Accept Rate at fixed False Accept Rates (TAR@FAR = 1% and 0.1%).
+For single inference, the harness reports the encrypted similarity score for the pair.
+</p>
+
+<p>The face-recognition harness contains a script that can be called to run the implementation of submitters, that script accepts command-line arguments to specify which interface of what instance size to run.
+The harness currently supports verification on CelebA pairs with a reference <a href="https://github.com/fhe-benchmarking/face-recognition">CryptoFace</a> <a href="#AB25">[AB25]</a> submission (a patch-wise CNN with polynomial activations, evaluated under RNS-CKKS). In the future, this workload may be updated to support more models and more datasets.</p>
+
+<div class="code-block">
+<pre><code>
+$ uv run python harness/run_submission.py -h
+usage: run_submission.py [-h] [--num_runs NUM_RUNS] [--seed SEED]
+                         [--clrtxt CLRTXT]
+                         {0,1,2,3}
+
+Run Face Verification FHE benchmark.
+
+positional arguments:
+  {0,1,2,3}            Instance size (0-single/1-small/2-medium/3-large)
+
+options:
+  -h, --help           show this help message and exit
+  --num_runs NUM_RUNS  Number of times to run <a href="https://github.com/fhe-benchmarking/face-recognition/blob/main/harness/run_submission.py" style="color: #63b3ed;">stages 4-10</a> (default: 1)
+  --seed SEED          Random seed for reproducible pair sampling (default: 42).
+                       Fixed by default so all submissions sample identical pairs.
+  --clrtxt CLRTXT      Set to 1 to force rerun of the cleartext reference
+</code></pre>
+</div>
+
+<p>Because the harness generates the evaluation pairs (submission-agnostic) before invoking any submission, and the seed defaults to a fixed value, every submission run with the default configuration is evaluated on the same pairs and is therefore directly comparable.</p>
+
+You can find more details on the <a href="https://github.com/fhe-benchmarking/face-recognition">face-recognition Github repository</a>.
+
+
+<hr/>
+<h3>Bibliography</h3>
+<div class="bib-entry">
+<p><span id="AB25" style="font-weight: bold;">[AB25]</span>
+<em>CryptoFace: End-to-End Encrypted Face Recognition.</em>
+Wei Ao and Vishnu Naresh Boddeti.
+<a href="https://arxiv.org/abs/2509.00332">IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), 2025</a>.
+</p>
+</div>
+<div class="bib-entry">
+<p><span id="DGX19" style="font-weight: bold;">[DGX+19]</span>
+<em>ArcFace: Additive Angular Margin Loss for Deep Face Recognition.</em>
+Jiankang Deng, Jia Guo, Niannan Xue, and Stefanos Zafeiriou.
+<a href="https://openaccess.thecvf.com/content_CVPR_2019/html/Deng_ArcFace_Additive_Angular_Margin_Loss_for_Deep_Face_Recognition_CVPR_2019_paper.html">IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), 2019</a>.
+</p>
+</div>
+</body>
+</html>
