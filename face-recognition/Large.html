@@ -34,11 +34,11 @@
         <table id="resultsTable" class="display">
             <thead>
                 <tr>
-                    <th colspan="8">Submitter</th>
+                    <th colspan="9">Submitter</th>
                     <th colspan="4">Bandwidth</th>
                     <th colspan="11">Quality</th>
                     <th colspan="14">Timing (harness)</th>
-                    <th colspan="12">Timing (server)</th>
+                    <th colspan="13">Timing (server)</th>
                 </tr>
                 <tr>
                     <th class="submitter-header">Name</th>
@@ -47,6 +47,7 @@
                     <th class="submitter-header">RAM</th>
                     <th class="submitter-header">Orion</th>
                     <th class="submitter-header">Slots</th>
+                    <th class="submitter-header">Chunk</th>
                     <th class="submitter-header">R/L</th>
                     <th class="submitter-header">Runs</th>
                     <th class="bandwidth-header">Keys</th>
@@ -79,6 +80,7 @@
                     <th class="harness-timing-header">ArcFace</th>
                     <th class="harness-timing-header">Quality</th>
                     <th class="server-timing-header">Total (wall)</th>
+                    <th class="server-timing-header">Process lifetime</th>
                     <th class="server-timing-header">Setup (wall)</th>
                     <th class="server-timing-header">Model I/O</th>
                     <th class="server-timing-header">Runtime compile</th>
@@ -95,17 +97,18 @@
             <tbody>
                 <tr>
                     <td><a href="https://github.com/fhe-benchmarking/face-recognition">CryptoFace</a></td>
-                    <td>2026-07-31</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
+                    <td>2026-08-06 11:57:25</td>
+                    <td>AMD EPYC 7502 32-Core Processor</td>
+                    <td>1007.7 GiB</td>
+                    <td>7e27281354f9</td>
+                    <td>10</td>
+                    <td>50</td>
                     <td>L</td>
                     <td>3</td>
                     <td>28.8G</td>
-                    <td>-</td>
-                    <td>128.0G</td>
-                    <td>6.0G</td>
+                    <td>114.1G</td>
+                    <td>128.1G</td>
+                    <td>1.0G</td>
                     <td>0.0723</td>
                     <td>0.8477</td>
                     <td>0.8203</td>
@@ -117,32 +120,33 @@
                     <td>-0.1113</td>
                     <td>0.1500</td>
                     <td>PASS</td>
-                    <td>19.508h</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>295.9ms</td>
-                    <td>23.813s</td>
-                    <td>4.795s</td>
-                    <td>28.252s</td>
-                    <td>18.584m</td>
-                    <td>41.823m</td>
-                    <td>18.126h</td>
-                    <td>3.519m</td>
-                    <td>50.5ms</td>
-                    <td>18.064m</td>
-                    <td>3.3ms</td>
-                    <td>18.107h</td>
-                    <td>25.229m</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>17.672h</td>
-                    <td>466.686h</td>
-                    <td>1.179h</td>
-                    <td>13.542m</td>
-                    <td>1.035m</td>
+                    <td>12.507h</td>
+                    <td>17.689m</td>
+                    <td>12.213h</td>
+                    <td>325.8ms</td>
+                    <td>8.320m</td>
+                    <td>9.364m</td>
+                    <td>19.437s</td>
+                    <td>22.180m</td>
+                    <td>46.576m</td>
+                    <td>10.688h</td>
+                    <td>3.428m</td>
+                    <td>47.4ms</td>
+                    <td>18.950m</td>
+                    <td>11.7ms</td>
+                    <td>10.644h</td>
+                    <td>10.677h</td>
+                    <td>22.475m</td>
+                    <td>13.842m</td>
+                    <td>8.478m</td>
+                    <td>51.956m</td>
+                    <td>9.143m</td>
+                    <td>663.424h</td>
+                    <td>10.270h</td>
+                    <td>662.592h</td>
+                    <td>42.366m</td>
+                    <td>7.560m</td>
+                    <td>36.105s</td>
                 </tr>
             </tbody>
         </table>
