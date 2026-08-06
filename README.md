@@ -90,6 +90,16 @@ For questions or to get involved:
 Visit the Homomorphic Encryption Standardization community:
 [homomorphicencryption.org](https://homomorphicencryption.org)
 
+Additional tutorials and research:
+
+- [Computer Vision over Homomorphically Encrypted Data — CVPR 2025 Tutorial](https://fhe4cv.github.io/)
+- [SecureRAG: End-to-End Secure Retrieval-Augmented Generation](https://hal.cse.msu.edu/papers/securerag-end-to-end-secure-rag/)
+- [Homomorphically Encrypted Biometric Template Fusion and Matching](https://hal.cse.msu.edu/papers/homomorphically-encrypted-biometric-template-fusion-matching/)
+- [AutoFHE: Automated Adaptation of CNNs for Efficient Evaluation over FHE](https://hal.cse.msu.edu/papers/autofhe-efficient-cnns-over-fhe/)
+- [Secure Face Matching Using Fully Homomorphic Encryption](https://hal.cse.msu.edu/papers/secure-face-matching/)
+- [HERS: Homomorphically Encrypted Representation Search](https://hal.cse.msu.edu/papers/hers-encrypted-image-search/)
+- [HEFT: Homomorphically Encrypted Fusion of Biometric Templates](https://hal.cse.msu.edu/papers/heft-encrypted-biometric-fusion/)
+
 ### Organizers
 Andreea Alexandru, Flavio Bergamaschi, Shruthi Gorantala, Shai Halevi
 
@@ -104,4 +114,4 @@ Andreea Alexandru, Flavio Bergamaschi, Shruthi Gorantala, Shai Halevi
 
 ---
 
-[Code of Conduct](./CODE_OF_CONDUCT.html) | © 2026 [HomomorphicEncryption.org](https://homomorphicencryption.org) | Last updated 2026-02-19
+[Code of Conduct](./CODE_OF_CONDUCT.html) | © 2026 [HomomorphicEncryption.org](https://homomorphicencryption.org) | Last updated 2026-08-06
