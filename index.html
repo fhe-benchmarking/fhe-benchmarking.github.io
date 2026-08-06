@@ -110,10 +110,40 @@
             color: #666;
             font-size: 0.9em;
         }
+
+        .local-preview-note {
+            padding: 12px 15px;
+            border-left: 4px solid #3498db;
+            background: #eef7fd;
+        }
     </style>
 </head>
 <body>
-    <div id="content"></div>
+    <div id="content">
+        <h1>FHE Benchmarking Suite</h1>
+        <p class="local-preview-note">Local website preview. Use the links below to open the newly added face-recognition pages.</p>
+
+        <h2>Face Recognition</h2>
+        <p>Privacy-preserving face verification using encrypted facial embeddings.</p>
+        <ul>
+            <li><a href="face-recognition/index.html">Specification and results</a></li>
+            <li><a href="face-recognition/Single.html">Single inference</a></li>
+            <li><a href="face-recognition/Small.html">Small batch (128 pairs)</a></li>
+            <li><a href="face-recognition/Medium.html">Medium batch (256 pairs)</a></li>
+            <li><a href="face-recognition/Large.html">Large batch (1,024 pairs)</a></li>
+        </ul>
+
+        <h2>Additional Tutorials and Research</h2>
+        <ul>
+            <li><a href="https://fhe4cv.github.io/">Computer Vision over Homomorphically Encrypted Data — CVPR 2025 Tutorial</a></li>
+            <li><a href="https://openreview.net/pdf?id=5uXACIHz6K">SecureRAG: End-to-End Secure Retrieval-Augmented Generation</a> — <em>NeurIPS GenAI4Health Workshop, 2025</em>.</li>
+            <li><a href="https://hal.cse.msu.edu/assets/pdfs/papers/2025-tbiom-homomorphically-encrypted-biometric-template-fusion-and-matching.pdf">Homomorphically Encrypted Biometric Template Fusion and Matching</a> — <em>IEEE Transactions on Biometrics, Behavior, and Identity Science, 2025</em>.</li>
+            <li><a href="https://arxiv.org/abs/2310.08012">AutoFHE: Automated Adaptation of CNNs for Efficient Evaluation over FHE</a> — <em>33rd USENIX Security Symposium, 2024</em>.</li>
+            <li><a href="https://arxiv.org/abs/2003.12197">HERS: Homomorphically Encrypted Representation Search</a> — <em>IEEE Transactions on Biometrics, Behavior, and Identity Science, 2022</em>.</li>
+            <li><a href="https://arxiv.org/abs/2208.07241">HEFT: Homomorphically Encrypted Fusion of Biometric Templates</a> — <em>IEEE International Joint Conference on Biometrics, 2022</em>.</li>
+            <li><a href="https://arxiv.org/abs/1805.00577">Secure Face Matching Using Fully Homomorphic Encryption</a> — <em>IEEE International Conference on Biometrics: Theory, Applications, and Systems, 2018</em>.</li>
+        </ul>
+    </div>
     <footer id="footer"></footer>
 
     <script>
@@ -141,7 +171,9 @@
                     footerContent.remove();
                 }
             } catch (error) {
-                document.getElementById('content').innerHTML = '<p>Error loading README: ' + error.message + '</p>';
+                // Browsers block fetch() for neighboring files when index.html is
+                // opened directly. Keep the built-in local preview visible.
+                console.info('Using local preview because README.md could not be loaded:', error.message);
             }
         }
         

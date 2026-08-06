@@ -15,9 +15,10 @@
         h1 { font-size: 1.5rem; letter-spacing: 0; }
         .table-wrap { width: 100%; overflow-x: auto; }
         #resultsTable { border-collapse: collapse; width: 100%; }
-        #resultsTable th, #resultsTable td { padding: 4px 8px; white-space: nowrap; }
-        #resultsTable thead tr:first-child th { background: #263645; color: white; text-align: center; }
-        #resultsTable thead tr:nth-child(2) th { color: white; font-size: 0.85rem; }
+        .table-wrap table.dataTable th, .table-wrap table.dataTable td { padding: 4px 8px; white-space: nowrap; }
+        .table-wrap table.dataTable thead tr:first-child th { color: white; text-align: center; }
+        .table-wrap table.dataTable thead tr:nth-child(2) th { color: white; font-size: 0.85rem; }
+        .group-header { text-align: center !important; vertical-align: middle; }
         .submitter-header { background: #2471a3 !important; }
         .bandwidth-header { background: #1e8449 !important; }
         .quality-header { background: #7d3c98 !important; }
@@ -34,11 +35,11 @@
         <table id="resultsTable" class="display">
             <thead>
                 <tr>
-                    <th colspan="9">Submitter</th>
-                    <th colspan="4">Bandwidth</th>
-                    <th colspan="11">Quality</th>
-                    <th colspan="14">Timing (harness)</th>
-                    <th colspan="13">Timing (server)</th>
+                    <th class="submitter-header group-header" colspan="9">Submitter</th>
+                    <th class="bandwidth-header group-header" colspan="4">Bandwidth</th>
+                    <th class="quality-header group-header" colspan="11">Quality</th>
+                    <th class="harness-timing-header group-header" colspan="14">Timing (harness)</th>
+                    <th class="server-timing-header group-header" colspan="13">Timing (server)</th>
                 </tr>
                 <tr>
                     <th class="submitter-header">Name</th>
