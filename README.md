@@ -96,9 +96,9 @@ Additional tutorials and research:
 - [SecureRAG: End-to-End Secure Retrieval-Augmented Generation](https://openreview.net/pdf?id=5uXACIHz6K) — *NeurIPS GenAI4Health Workshop, 2025*.
 - [Homomorphically Encrypted Biometric Template Fusion and Matching](https://hal.cse.msu.edu/assets/pdfs/papers/2025-tbiom-homomorphically-encrypted-biometric-template-fusion-and-matching.pdf) — *IEEE Transactions on Biometrics, Behavior, and Identity Science, 2025*.
 - [AutoFHE: Automated Adaptation of CNNs for Efficient Evaluation over FHE](https://arxiv.org/abs/2310.08012) — *33rd USENIX Security Symposium, 2024*.
-- [Secure Face Matching Using Fully Homomorphic Encryption](https://arxiv.org/abs/1805.00577) — *IEEE International Conference on Biometrics: Theory, Applications, and Systems, 2018*.
 - [HERS: Homomorphically Encrypted Representation Search](https://arxiv.org/abs/2003.12197) — *IEEE Transactions on Biometrics, Behavior, and Identity Science, 2022*.
 - [HEFT: Homomorphically Encrypted Fusion of Biometric Templates](https://arxiv.org/abs/2208.07241) — *IEEE International Joint Conference on Biometrics, 2022*.
+- [Secure Face Matching Using Fully Homomorphic Encryption](https://arxiv.org/abs/1805.00577) — *IEEE International Conference on Biometrics: Theory, Applications, and Systems, 2018*.
 
 ### Organizers
 Andreea Alexandru, Flavio Bergamaschi, Shruthi Gorantala, Shai Halevi
