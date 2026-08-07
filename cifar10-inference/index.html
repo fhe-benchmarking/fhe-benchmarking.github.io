@@ -2,7 +2,7 @@
 <html lang="EN-US">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=us-ascii">
-<title>FHE Benchmarking: MNIST-Inference Workload</title>
+<title>FHE Benchmarking: CIFAR-10 ML-Inference Workload</title>
 <style>
     /* Layout and Typography */
     body {
@@ -125,9 +125,9 @@
     <a href="https://github.com/fhe-benchmarking/ml-inference">github.com/fhe-benchmarking/ml-inference</a>
 </div>
 
-<h1>FHE Benchmarking: ML Inference Workload</h1>
+<h1>FHE Benchmarking: CIFAR-10 ML Inference Workload</h1>
 
-<h2>Results - MNIST</h2>
+<h2>Results - CIFAR-10</h2>
 <ul>
 <li>Single Inference:
     <a href="Single.html">Single</a>.
@@ -141,15 +141,15 @@
 
 <h2>Specification</h2>
 <p>The ML inference workload implements an encrypted inference functionality.
-The input is a collection of 28x28 images from the MNIST dataset representing handwritten digits.
-The goal is to classify these images between 0 and 9 using encrypted ML Inference using homomorphic encryption.
+The input is a collection of 32x32 images with 3 RGB channels from the CIFAR-10 dataset representing 10 object classes (airplane, automobile, bird, cat, deer, dog, frog, horse, ship, truck).
+The goal is to classify these images into one of the 10 classes using encrypted ML Inference using homomorphic encryption.
 </p>
 
 <p>The workload includes two interfaces for benchmark submitters to implement: </p>
 
 <ul type="disc">
- <li>Single Inference: On single input pixel. The submitter is expected to implement the inference functionality for a single input pixel.</li>
- <li>Batched Inference: On batch of input pixels. The submitter is expected to implement the inference functionality for a batch of input pixels. This can be more efficient than single inference for large datasets leveraging parallelism.</li>
+ <li>Single Inference: On single input image. The submitter is expected to implement the inference functionality for a single input image.</li>
+ <li>Batched Inference: On batch of input images. The submitter is expected to implement the inference functionality for a batch of input images. This can be more efficient than single inference for large datasets leveraging parallelism.</li>
 </ul>
 
 <table>

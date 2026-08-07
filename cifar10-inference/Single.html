@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>FHE Benchmarking Results - ML Inference (Single)</title>
+    <title>FHE Benchmarking Results - CIFAR10 Inference (Single)</title>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
@@ -27,7 +27,7 @@
     </style>
 </head>
 <body>
-    <h1>FHE Benchmarking Results - MNIST Inference (Single)</h1>
+    <h1>FHE Benchmarking Results - CIFAR10 Inference (Single)</h1>
     
     <table id="resultsTable" class="display">
         <thead>
@@ -63,17 +63,12 @@
     <th id="col26" class="server-timing-header" title="Input encryption">Input Enc</th>
     <th id="col27" class="server-timing-header" title="Encrypted computation">Compute</th>
     <th id="col28" class="server-timing-header" title="Result decryption and postprocessing">Decrypt</th>
+    <th id="col29" class="server-timing-header" title="Server-reported I/O time">I/O</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td><a href="https://github.com/Lattica-ai/ml-inference">Lattica-ai</a></td><td>2026&#8209;02&#8209;23 16:49:29</td><td>GPU</td><td>R</td><td>mlp</td><td class="divider"></td><td>113M</td><td>256.1K</td><td>256.1K</td><td class="divider"></td><td>26.79s</td><td>7.3174s</td><td>3.404s</td><td>200us</td><td>2.5856s</td><td>1.6016s</td><td>1.6353s</td><td>1.8656s</td><td>1.6942s</td><td class="divider"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>48.33ms</td><td></td>
-            </tr>
-            <tr>
-                <td><a href="https://github.com/Lattica-ai/ml-inference">Lattica-ai</a></td><td>2026&#8209;05&#8209;25 08:42:44</td><td>GPU</td><td>R</td><td>mlp</td><td class="divider"></td><td>46M</td><td>128.1K</td><td>128.1K</td><td class="divider"></td><td>24.45s</td><td>7.1235s</td><td>2.1834s</td><td>200us</td><td>2.5703s</td><td>1.5982s</td><td>1.6326s</td><td>1.8617s</td><td>1.6477s</td><td class="divider"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>15.33ms</td><td></td>
-            </tr>
-            <tr>
-                <td><a href="https://github.com/fhe-benchmarking/ml-inference">Reference</a></td><td>2026&#8209;02&#8209;20 03:38:16</td><td>CPU</td><td>L</td><td>mlp</td><td class="divider"></td><td>1G</td><td>5M</td><td>1M</td><td class="divider"></td><td>15.57s</td><td>4.7884s</td><td>975.1ms</td><td>3.7ms</td><td>1.9934s</td><td>3.5ms</td><td>92.47ms</td><td>7.6306s</td><td>83.93ms</td><td class="divider"></td><td>6.48s</td><td></td><td></td><td></td><td></td><td></td><td></td><td>6.48s</td><td></td>
+                <td><a href="https://github.com/fhe-benchmarking/ml-inference">Reference</a></td><td>2026&#8209;08&#8209;05 03:38:16</td><td>CPU</td><td>L</td><td>resnet20</td><td class="divider"></td><td>50.4G</td><td>28M</td><td>8M</td><td class="divider"></td><td>33.52m</td><td>14.34s</td><td>1.0766m</td><td>6ms</td><td>2.9962s</td><td>2.7333ms</td><td>533.5ms</td><td>32.14m</td><td>370.2ms</td><td class="divider"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
             </tr>
         </tbody>
     </table>
@@ -87,7 +82,7 @@
                     columns: ':not(.no-toggle)'
                 }],
                 columnDefs: [
-                    { targets: [11, 13, 15, 21, 22, 23, 24, 25, 26, 28], visible: false },
+                    { targets: [11, 15, 21, 22, 23, 24, 25, 26, 28], visible: false },
                     { targets: [0, 1, 2, 3, 5, 7, 9, 10, 19], className: 'no-toggle' },
                     { targets: [5, 9, 19], orderable: false, searchable: false, className: 'divider' }
                 ],

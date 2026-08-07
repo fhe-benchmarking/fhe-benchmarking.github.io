@@ -26,7 +26,9 @@ Each workload represents a real-world use case with clear specifications, refere
 
 - [**Fetch-by-Similarity**](./fetch-by-similarity/index.html). Private database queries using cosine similarity search over encrypted data.
 
-- [**ML Inference**](./ml-inference/index.html). Privacy-preserving machine learning inference on encrypted inputs. Currently features MNIST digit classification, with other models to come.
+- [**MNIST Inference**](./ml-inference/index.html). Privacy-preserving machine learning inference on encrypted inputs for MNIST digit classification.
+
+- [**CIFAR10 Inference**](./cifar10-inference/index.html). Privacy-preserving machine learning inference on encrypted inputs. for CIFAR-10 image classification, with more models to come.
 
 - [**Zn Multiplication**](./Zn-multiplication/index.html). Multiplication of two encrypted 64-bit encrypted integers. Other bit-sizes for the multiplicands will be added.
 
