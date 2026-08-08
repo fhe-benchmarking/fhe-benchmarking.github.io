@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:,">
     <title>FHE Benchmarking Suite</title>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
@@ -57,6 +58,17 @@
         table {
             border-collapse: collapse;
             margin: 20px 0;
+        }
+
+        #content table {
+            display: block;
+            max-width: 100%;
+            overflow-x: auto;
+        }
+
+        #content img {
+            max-width: 100%;
+            height: auto;
         }
         
         table, th, td {
@@ -124,7 +136,7 @@
         <p class="local-preview-note">Local website preview. Use the links below to open the newly added face-recognition pages.</p>
 
         <h2>Face Recognition</h2>
-        <p>Privacy-preserving face verification using encrypted facial embeddings.</p>
+        <p>End-to-end privacy-preserving face verification with encrypted feature extraction and matching.</p>
         <ul>
             <li><a href="face-recognition/index.html">Specification and results</a></li>
             <li><a href="face-recognition/Single.html">Single inference</a></li>
@@ -137,7 +149,7 @@
         <ul>
             <li><a href="https://fhe4cv.github.io/">Computer Vision over Homomorphically Encrypted Data — CVPR 2025 Tutorial</a></li>
             <li><a href="https://openreview.net/pdf?id=5uXACIHz6K">SecureRAG: End-to-End Secure Retrieval-Augmented Generation</a> — <em>NeurIPS GenAI4Health Workshop, 2025</em>.</li>
-            <li><a href="https://hal.cse.msu.edu/assets/pdfs/papers/2025-tbiom-homomorphically-encrypted-biometric-template-fusion-and-matching.pdf">Homomorphically Encrypted Biometric Template Fusion and Matching</a> — <em>IEEE Transactions on Biometrics, Behavior, and Identity Science, 2025</em>.</li>
+            <li><a href="https://doi.org/10.1109/TBIOM.2025.3595438">Homomorphically Encrypted Biometric Template Fusion and Matching</a> — <em>IEEE Transactions on Biometrics, Behavior, and Identity Science, 2025</em>.</li>
             <li><a href="https://arxiv.org/abs/2310.08012">AutoFHE: Automated Adaptation of CNNs for Efficient Evaluation over FHE</a> — <em>33rd USENIX Security Symposium, 2024</em>.</li>
             <li><a href="https://arxiv.org/abs/2003.12197">HERS: Homomorphically Encrypted Representation Search</a> — <em>IEEE Transactions on Biometrics, Behavior, and Identity Science, 2022</em>.</li>
             <li><a href="https://arxiv.org/abs/2208.07241">HEFT: Homomorphically Encrypted Fusion of Biometric Templates</a> — <em>IEEE International Joint Conference on Biometrics, 2022</em>.</li>

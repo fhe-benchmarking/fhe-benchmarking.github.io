@@ -36,7 +36,7 @@ Each workload represents a real-world use case with clear specifications, refere
 
 - [**Transciphering**](./transciphering/index.html). Homomorphic AES decryption, converting AES-encrypted data into FHE ciphertexts of the same plaintexts. The quality of the resulting ciphertexts is assessed by evaluating a mini-workload (maximum or inner product) over them.
 
-- [**Face Recognition**](./face-recognition/index.html). Privacy-preserving face verification using encrypted facial embeddings, with single-pair and batched benchmark results.
+- [**Face Recognition**](./face-recognition/index.html). End-to-end privacy-preserving face verification with encrypted feature extraction and matching, including single-pair and batched benchmark results.
 
 *Additional workloads are under development. Check back for updates.*
 
@@ -94,7 +94,7 @@ Additional tutorials and research:
 
 - [Computer Vision over Homomorphically Encrypted Data — CVPR 2025 Tutorial](https://fhe4cv.github.io/)
 - [SecureRAG: End-to-End Secure Retrieval-Augmented Generation](https://openreview.net/pdf?id=5uXACIHz6K) — *NeurIPS GenAI4Health Workshop, 2025*.
-- [Homomorphically Encrypted Biometric Template Fusion and Matching](https://hal.cse.msu.edu/assets/pdfs/papers/2025-tbiom-homomorphically-encrypted-biometric-template-fusion-and-matching.pdf) — *IEEE Transactions on Biometrics, Behavior, and Identity Science, 2025*.
+- [Homomorphically Encrypted Biometric Template Fusion and Matching](https://doi.org/10.1109/TBIOM.2025.3595438) — *IEEE Transactions on Biometrics, Behavior, and Identity Science, 2025*.
 - [AutoFHE: Automated Adaptation of CNNs for Efficient Evaluation over FHE](https://arxiv.org/abs/2310.08012) — *33rd USENIX Security Symposium, 2024*.
 - [HERS: Homomorphically Encrypted Representation Search](https://arxiv.org/abs/2003.12197) — *IEEE Transactions on Biometrics, Behavior, and Identity Science, 2022*.
 - [HEFT: Homomorphically Encrypted Fusion of Biometric Templates](https://arxiv.org/abs/2208.07241) — *IEEE International Joint Conference on Biometrics, 2022*.
