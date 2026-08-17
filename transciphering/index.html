@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="EN-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=us-ascii">
+<title>FHE Benchmarking: Transciphering Workload</title>
+<style>
+    /* Layout and Typography */
+    body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    color: #2d3748;
+    max-width: 850px;
+    margin: 40px auto;
+    padding: 0 20px;
+    background-color: #ffffff;
+    }
+
+    h1 {
+    font-size: 2.25rem;
+    color: #1a202c;
+    border-bottom: 2px solid #e2e8f0;
+    }
+
+    h2 {
+    font-size: 1.5rem;
+    color: #2d3748;
+    border-bottom: 1px solid #edf2f7;
+    }
+
+    h3 {
+    font-size: 1.25rem;
+    margin-top: 1.5em;
+    }
+
+    /* Links */
+    a {
+    color: #3182ce;
+    text-decoration: none;
+    }
+    a:hover {
+    text-decoration: underline;
+    }
+
+    /* Colored Boxes */
+    .code-block {
+    padding: 15px;
+    background-color: #2d3748; /* Dark theme for code */
+    color: #edf2f7;
+    border-radius: 6px;
+    overflow-x: auto;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.9em;
+    margin: 10px 0;
+    }
+
+    .algorithm-box {
+    background-color: #f7fafc;
+    border: 1px solid #e2e8f0;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 25px 0;
+    }
+
+    blockquote {
+    background: #fffaf0; /* Warm highlight */
+    border-left: 5px solid #ed8936;
+    margin: 20px 0;
+    padding: 15px 20px;
+    font-style: italic;
+    }
+
+    /* Table Styling */
+    table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    }
+
+    th, td {
+    text-align: left;
+    padding: 12px;
+    border: 1px solid #e2e8f0;
+    }
+
+    th {
+    background-color: #f1f5f9;
+    font-weight: 600;
+    }
+
+    .small-caps {
+    font-variant: small-caps;
+    }
+
+    details {
+    border: 1px solid #e2e8f0;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 20px 0;
+    }
+
+    summary {
+    font-weight: bold;
+    cursor: pointer;
+    outline: none;
+    }
+
+    .bib-entry {
+    margin-bottom: 15px;
+    }
+
+    .repository-link {
+    background: #edf2f7;
+    padding: 10px 15px;
+    border-radius: 5px;
+    display: inline-block;
+    }
+
+</style>
+</head>
+
+<body>
+
+<div class="repository-link">
+    <strong>Repository is found at</strong>
+    <a href="https://github.com/fhe-benchmarking/transciphering">github.com/fhe-benchmarking/transciphering</a>
+</div>
+
+<h1>FHE Benchmarking: AES-Transciphering Workload</h1>
+
+<h2>Results</h2>
+<ul>
+<li>Maximum mini-workload:
+    <a href="Max-Toy.html">Toy</a>,
+    <a href="Max-Small.html">Small</a>,
+    <a href="Max-Medium.html">Medium</a>,
+    <a href="Max-Large.html">Large</a>.
+</li>
+<li>Inner-product mini-workload:
+    <a href="IP-Toy.html">Toy</a>,
+    <a href="IP-Small.html">Small</a>,
+    <a href="IP-Medium.html">Medium</a>,
+    <a href="IP-Large.html">Large</a>.
+</li>
+</ul>
+
+<h2>Specification</h2>
+<p>The AES-transciphering workload implements an encrypted symmetric-to-FHE conversion functionality.
+Transciphering bridges symmetric encryption and FHE: the client encrypts its data with AES-128 (which has no ciphertext expansion) and provides the server with an FHE encryption of the AES key; the server then homomorphically evaluates the AES decryption circuit to obtain FHE ciphertexts of the same data, without ever seeing the data or the AES key in the clear.
+This avoids uploading large FHE ciphertexts of the dataset itself.
+</p>
+
+<p>The dataset is a vector of uniformly random 16-bit unsigned integers, packed big-endian into 16-byte AES blocks (eight values per block).
+The toy instance is a single block encrypted in ECB mode; the larger instances are encrypted in CTR mode with a public IV.
+Note that, unlike in other workloads, the toy instance here is a full-fledged variant of the workload: it exercises a different AES mode (ECB on a single block instead of CTR), so results for it are reported alongside the other sizes.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Size</th>
+      <th>Values (uint16)</th>
+      <th>AES blocks</th>
+      <th>AES mode</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Toy</td>
+      <td>8</td>
+      <td>1</td>
+      <td>ECB</td>
+    </tr>
+    <tr>
+      <td>Small</td>
+      <td>128</td>
+      <td>16</td>
+      <td>CTR</td>
+    </tr>
+    <tr>
+      <td>Medium</td>
+      <td>2048</td>
+      <td>256</td>
+      <td>CTR</td>
+    </tr>
+    <tr>
+      <td>Large</td>
+      <td>32,768</td>
+      <td>4096</td>
+      <td>CTR</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The quality of the transciphered FHE ciphertexts is assessed by evaluating one of two mini-workloads over them after the transciphering: </p>
+
+<ul type="disc">
+ <li>Maximum: Compute the maximum of the input message parsed as 16-bit unsigned integers.</li>
+ <li>Inner product: Compute the inner product modulo 2^16 of the first half of the input message parsed as 16-bit unsigned integers and the second half.</li>
+</ul>
+
+<p>Hence, there are a total of eight variants of this workload: the maximum and inner-product mini-workloads for each one of the four sizes (toy, small, medium, large).
+Submitters need not implement all eight, instead each submitter can implement and report the results of any subset.</p>
+
+<p>Submission to the benchmarking suite must set the implementation parameters so as to achieve security level of at least 128 bits (against a semi-honest server).
+Submitters must document their choice of parameters and explain why they believe that it meets the 128-bit security mandate.
+(For example, for LWE-based schemes without a sparse key, they can rely on Table 5.2 or Table 5.3 in the HE-security-guidelines document of Bossuat et al. <a href="#BCC24">[BCC+24]</a>.)</p>
+
+<p>All submissions must also ensure the correctness of both the transciphered ciphertexts and the mini-workload output with full precision.
+</p>
+
+
+<p>The transciphering harness contains a script that can be called to run the implementation of submitters, that script accepts command-line arguments to specify which mini-workload of what instance size to run.</p>
+
+<div class="code-block">
+<pre><code>
+$ python3 harness/run_submission.py -h
+usage: run_submission.py [-h] [--num_runs NUM_RUNS] [--seed SEED]
+                         [--mini_workload MINI_WORKLOAD]
+                         {0,1,2,3}
+
+Run the AES-transciphering FHE benchmark.
+
+positional arguments:
+  {0,1,2,3}             Instance size (0-toy/1-small/2-medium/3-large)
+
+options:
+  -h, --help            show this help message and exit
+  --num_runs NUM_RUNS   Number of times to run <a href="https://github.com/fhe-benchmarking/transciphering/blob/main/harness/run_submission.py#L86-L116" style="color: #63b3ed;">steps 7-14</a> (default: 1)
+  --seed SEED           Random seed for dataset generation
+  --mini_workload MINI_WORKLOAD
+                        Mini-workload to verify: 0 for the maximum, 1 for the
+                        inner product (default: 0)
+</code></pre>
+</div>
+You can find more details on the <a href="https://github.com/fhe-benchmarking/transciphering">transciphering Github repository</a>.
+
+
+<hr/>
+<h3>Bibliography</h3>
+<div class="bib-entry">
+<p><span id="BCC24" style="font-weight: bold;">[BCC+24]</span>
+<em>Security guidelines for implementing homomorphic encryption.</em>
+Jean-Philippe Bossuat, Rosario Cammarota, Ilaria Chillotti, Benjamin R. Curtis,
+Wei Dai, Huijing Gong, Erin Hales, Duhyeong Kim, Bryan Kumara, Changmin Lee,
+Xianhui Lu, Carsten Maple, Alberto Pedrouzo-Ulloa, Rachel Player, Yuriy Polyakov,
+Luis Antonio Ruiz Lopez, Yongsoo Song, and Donggeon Yhee.
+<a href="https://doi.org/10.62056/anxra69p1">IACR Communications in Cryptology, 1(4):26, 2024</a>.
+</p>
+</div>
+</body>
+</html>
