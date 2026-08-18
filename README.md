@@ -34,6 +34,8 @@ Each workload represents a real-world use case with clear specifications, refere
 
 - [**BERT**](./BERT/index.html). Privacy-preserving BERT inference on encrypted inputs. Currently supports [BERT-Base (110M)](https://huggingface.co/google-bert/bert-base-cased-finetuned-mrpc) inference on the MRPC task in the [GLUE benchmark](https://gluebenchmark.com/).
 
+- [**Transciphering**](./transciphering/index.html). Homomorphic AES decryption, converting AES-encrypted data into FHE ciphertexts of the same plaintexts. The quality of the resulting ciphertexts is assessed by evaluating a mini-workload (maximum or inner product) over them.
+
 *Additional workloads are under development. Check back for updates.*
 
 ## Suite Structure
