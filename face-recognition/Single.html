@@ -32,7 +32,7 @@
     <table id="resultsTable" class="display">
         <thead>
             <tr>
-                <th colspan="4">Submitter</th> <th class="divider"></th> <th colspan="3">Bandwidth</th> <th class="divider"></th> <th colspan="9">Timing (harness)</th> <th class="divider"></th> <th colspan="10">Timing (server)</th>
+                <th colspan="4">Submitter</th> <th class="divider"></th> <th colspan="4">Bandwidth</th> <th class="divider"></th> <th colspan="9">Timing (harness)</th> <th class="divider"></th> <th colspan="10">Timing (server)</th>
             </tr>
             <tr><th id="col0" class="submitter-header" title="Submitter Name">Name</th>
     <th id="col1" class="submitter-header" title="Submission Date">Date</th>
@@ -40,34 +40,35 @@
     <th id="col3" class="submitter-header" title="Remote/Local">R/L</th>
     <th id="col4" class="divider"></th>
     <th id="col5" class="bandwidth-header" title="Size of keys">Keys</th>
-    <th id="col6" class="bandwidth-header" title="Encrypted Input size">Input</th>
-    <th id="col7" class="bandwidth-header" title="Encrypted results size">Result</th>
-    <th id="col8" class="divider"></th>
-    <th id="col9" class="harness-timing-header" title="Total Time">Total</th>
-    <th id="col10" class="harness-timing-header" title="Dataset generation">DB Gen</th>
-    <th id="col11" class="harness-timing-header" title="Key Generation">Keygen</th>
-    <th id="col12" class="harness-timing-header" title="Encrypted model preprocessing">Model Prep</th>
-    <th id="col13" class="harness-timing-header" title="Input generation">Input Gen</th>
-    <th id="col14" class="harness-timing-header" title="Input preprocessing">Input Prep</th>
-    <th id="col15" class="harness-timing-header" title="Input encryption">Input Enc</th>
-    <th id="col16" class="harness-timing-header" title="Encrypted computation">Compute</th>
-    <th id="col17" class="harness-timing-header" title="Result decryption and postprocessing">Decrypt</th>
-    <th id="col18" class="divider"></th>
-    <th id="col19" class="server-timing-header" title="Total Time">Total</th>
-    <th id="col20" class="server-timing-header" title="Server-reported I/O time">I/O</th>
-    <th id="col21" class="server-timing-header" title="Dataset generation">DB Gen</th>
-    <th id="col22" class="server-timing-header" title="Key Generation">Keygen</th>
-    <th id="col23" class="server-timing-header" title="Encrypted model preprocessing">Model Prep</th>
-    <th id="col24" class="server-timing-header" title="Input generation">Input Gen</th>
-    <th id="col25" class="server-timing-header" title="Input preprocessing">Input Prep</th>
-    <th id="col26" class="server-timing-header" title="Input encryption">Input Enc</th>
-    <th id="col27" class="server-timing-header" title="Encrypted computation">Compute</th>
-    <th id="col28" class="server-timing-header" title="Result decryption and postprocessing">Decrypt</th>
+    <th id="col6" class="bandwidth-header" title="Packed model weights size">Packed Model</th>
+    <th id="col7" class="bandwidth-header" title="Encrypted Input size">Input</th>
+    <th id="col8" class="bandwidth-header" title="Encrypted results size">Result</th>
+    <th id="col9" class="divider"></th>
+    <th id="col10" class="harness-timing-header" title="Total Time">Total</th>
+    <th id="col11" class="harness-timing-header" title="Dataset generation">DB Gen</th>
+    <th id="col12" class="harness-timing-header" title="Key Generation">Keygen</th>
+    <th id="col13" class="harness-timing-header" title="Encrypted model preprocessing">Model Prep</th>
+    <th id="col14" class="harness-timing-header" title="Input generation">Input Gen</th>
+    <th id="col15" class="harness-timing-header" title="Input preprocessing">Input Prep</th>
+    <th id="col16" class="harness-timing-header" title="Input encryption">Input Enc</th>
+    <th id="col17" class="harness-timing-header" title="Encrypted computation">Compute</th>
+    <th id="col18" class="harness-timing-header" title="Result decryption and postprocessing">Decrypt</th>
+    <th id="col19" class="divider"></th>
+    <th id="col20" class="server-timing-header" title="Total Time">Total</th>
+    <th id="col21" class="server-timing-header" title="Server-reported I/O time">I/O</th>
+    <th id="col22" class="server-timing-header" title="Dataset generation">DB Gen</th>
+    <th id="col23" class="server-timing-header" title="Key Generation">Keygen</th>
+    <th id="col24" class="server-timing-header" title="Encrypted model preprocessing">Model Prep</th>
+    <th id="col25" class="server-timing-header" title="Input generation">Input Gen</th>
+    <th id="col26" class="server-timing-header" title="Input preprocessing">Input Prep</th>
+    <th id="col27" class="server-timing-header" title="Input encryption">Input Enc</th>
+    <th id="col28" class="server-timing-header" title="Encrypted computation">Compute</th>
+    <th id="col29" class="server-timing-header" title="Result decryption and postprocessing">Decrypt</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td><a href="https://github.com/fhe-benchmarking/face-recognition">Reference</a></td><td>2026&#8209;08&#8209;18 03:38:16</td><td>CPU</td><td>L</td><td class="divider"></td><td>28.8G</td><td>128.1M</td><td>1M</td><td class="divider"></td><td>43.33m</td><td>1.852s</td><td>4.8112m</td><td>24.16m</td><td>262.8ms</td><td>4.8755s</td><td>1.316m</td><td>12.4m</td><td>31.99s</td><td class="divider"></td><td>12.34m</td><td>5.8362m</td><td></td><td></td><td></td><td></td><td></td><td></td><td>1.8348m</td><td></td>
+                <td><a href="https://github.com/fhe-benchmarking/face-recognition">Reference</a></td><td>2026&#8209;08&#8209;18 03:38:16</td><td>CPU</td><td>L</td><td class="divider"></td><td>28.8G</td><td>114.1G</td><td>128.1M</td><td>1M</td><td class="divider"></td><td>43.33m</td><td>1.852s</td><td>4.8112m</td><td>24.16m</td><td>262.8ms</td><td>4.8755s</td><td>1.316m</td><td>12.4m</td><td>31.99s</td><td class="divider"></td><td>12.34m</td><td>5.8362m</td><td></td><td></td><td></td><td></td><td></td><td></td><td>1.8348m</td><td></td>
             </tr>
         </tbody>
     </table>
@@ -81,9 +82,9 @@
                     columns: ':not(.no-toggle)'
                 }],
                 columnDefs: [
-                    { targets: [10, 14, 21, 22, 23, 24, 25, 26, 28], visible: false },
-                    { targets: [0, 1, 2, 3, 4, 6, 8, 9, 18], className: 'no-toggle' },
-                    { targets: [4, 8, 18], orderable: false, searchable: false, className: 'divider' }
+                    { targets: [11, 15, 22, 23, 24, 25, 26, 27, 29], visible: false },
+                    { targets: [0, 1, 2, 3, 4, 7, 9, 10, 19], className: 'no-toggle' },
+                    { targets: [4, 9, 19], orderable: false, searchable: false, className: 'divider' }
                 ],
                 pageLength: 25,
                 order: [[1, 'desc']]
