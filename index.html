@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="data:,">
     <title>FHE Benchmarking Suite</title>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
@@ -59,19 +58,6 @@
             border-collapse: collapse;
             margin: 20px 0;
         }
-
-        #content {
-            overflow-x: auto;
-        }
-
-        #content table {
-            max-width: 100%;
-        }
-
-        #content img {
-            max-width: 100%;
-            height: auto;
-        }
         
         table, th, td {
             border: 1px solid #ddd;
@@ -124,30 +110,10 @@
             color: #666;
             font-size: 0.9em;
         }
-
-        .local-preview-note {
-            padding: 12px 15px;
-            border-left: 4px solid #3498db;
-            background: #eef7fd;
-        }
     </style>
 </head>
 <body>
-    <div id="content">
-        <h1>FHE Benchmarking Suite</h1>
-        <p class="local-preview-note">Local website preview. Use the links below to open the newly added face-recognition pages.</p>
-
-        <h2>Face Recognition</h2>
-        <p>End-to-end privacy-preserving face verification with encrypted feature extraction and matching.</p>
-        <ul>
-            <li><a href="face-recognition/index.html">Specification and results</a></li>
-            <li><a href="face-recognition/Single.html">Single inference</a></li>
-            <li><a href="face-recognition/Small.html">Small batch (128 pairs)</a></li>
-            <li><a href="face-recognition/Medium.html">Medium batch (256 pairs)</a></li>
-            <li><a href="face-recognition/Large.html">Large batch (1,024 pairs)</a></li>
-        </ul>
-
-    </div>
+    <div id="content"></div>
     <footer id="footer"></footer>
 
     <script>
@@ -175,9 +141,7 @@
                     footerContent.remove();
                 }
             } catch (error) {
-                // Browsers block fetch() for neighboring files when index.html is
-                // opened directly. Keep the built-in local preview visible.
-                console.info('Using local preview because README.md could not be loaded:', error.message);
+                document.getElementById('content').innerHTML = '<p>Error loading README: ' + error.message + '</p>';
             }
         }
         
