@@ -36,6 +36,8 @@ Each workload represents a real-world use case with clear specifications, refere
 
 - [**Transciphering**](./transciphering/index.html). Homomorphic AES decryption, converting AES-encrypted data into FHE ciphertexts of the same plaintexts. The quality of the resulting ciphertexts is assessed by evaluating a mini-workload (maximum or inner product) over them.
 
+- [**Face Recognition**](./face-recognition/index.html). End-to-end privacy-preserving face verification with encrypted feature extraction and matching, including single-pair and batched benchmark results.
+
 *Additional workloads are under development. Check back for updates.*
 
 ## Suite Structure
@@ -102,4 +104,4 @@ Andreea Alexandru, Flavio Bergamaschi, Shruthi Gorantala, Shai Halevi
 
 ---
 
-[Code of Conduct](./CODE_OF_CONDUCT.html) | © 2026 [HomomorphicEncryption.org](https://homomorphicencryption.org) | Last updated 2026-02-19
+[Code of Conduct](./CODE_OF_CONDUCT.html) | © 2026 [HomomorphicEncryption.org](https://homomorphicencryption.org) | Last updated 2026-08-06
