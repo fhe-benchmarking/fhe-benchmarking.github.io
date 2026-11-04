@@ -30,7 +30,7 @@
     <table id="resultsTable" class="display">
         <thead>
             <tr>
-                <th colspan="4">Submitter</th> <th class="divider"></th> <th colspan="3">Bandwidth</th> <th class="divider"></th> <th colspan="11">Timing (harness)</th> <th class="divider"></th> <th colspan="11">Timing (server)</th>
+                <th colspan="4">Submitter</th> <th class="divider"></th> <th colspan="4">Bandwidth</th> <th class="divider"></th> <th colspan="11">Timing (harness)</th> <th class="divider"></th> <th colspan="11">Timing (server)</th>
             </tr>
             <tr><th id="col0" class="submitter-header" title="Submitter Name">Name</th>
     <th id="col1" class="submitter-header" title="Submission Date">Date</th>
@@ -40,38 +40,39 @@
     <th id="col5" class="bandwidth-header" title="Size of keys">Keys</th>
     <th id="col6" class="bandwidth-header" title="Encrypted database size">DB</th>
     <th id="col7" class="bandwidth-header" title="Encrypted query size">Query</th>
-    <th id="col8" class="divider"></th>
-    <th id="col9" class="harness-timing-header" title="Total Time">Total</th>
-    <th id="col10" class="harness-timing-header" title="Dataset generation">DB Gen</th>
-    <th id="col11" class="harness-timing-header" title="Dataset preprocessing">DB Prep</th>
-    <th id="col12" class="harness-timing-header" title="Key Generation">Keygen</th>
-    <th id="col13" class="harness-timing-header" title="Dataset encoding and encryption">DB Enc</th>
-    <th id="col14" class="harness-timing-header" title="Encrypted dataset preprocessing">Enc Prep</th>
-    <th id="col15" class="harness-timing-header" title="Query generation">Q Gen</th>
-    <th id="col16" class="harness-timing-header" title="Query preprocessing">Q Prep</th>
-    <th id="col17" class="harness-timing-header" title="Query encryption">Q Enc</th>
-    <th id="col18" class="harness-timing-header" title="Encrypted computation">Compute</th>
-    <th id="col19" class="harness-timing-header" title="Result decryption and postprocessing">Decrypt</th>
-    <th id="col20" class="divider"></th>
-    <th id="col21" class="server-timing-header" title="Total Time">Total</th>
-    <th id="col22" class="server-timing-header" title="Dataset generation">DB Gen</th>
-    <th id="col23" class="server-timing-header" title="Dataset preprocessing">DB Prep</th>
-    <th id="col24" class="server-timing-header" title="Key Generation">Keygen</th>
-    <th id="col25" class="server-timing-header" title="Dataset encoding and encryption">DB Enc</th>
-    <th id="col26" class="server-timing-header" title="Encrypted dataset preprocessing">Enc Prep</th>
-    <th id="col27" class="server-timing-header" title="Query generation">Q Gen</th>
-    <th id="col28" class="server-timing-header" title="Query preprocessing">Q Prep</th>
-    <th id="col29" class="server-timing-header" title="Query encryption">Q Enc</th>
-    <th id="col30" class="server-timing-header" title="Encrypted computation">Compute</th>
-    <th id="col31" class="server-timing-header" title="Result decryption and postprocessing">Decrypt</th>
+    <th id="col8" class="bandwidth-header" title="Encrypted results size">Results</th>
+    <th id="col9" class="divider"></th>
+    <th id="col10" class="harness-timing-header" title="Total Time">Total</th>
+    <th id="col11" class="harness-timing-header" title="Dataset generation">DB Gen</th>
+    <th id="col12" class="harness-timing-header" title="Dataset preprocessing">DB Prep</th>
+    <th id="col13" class="harness-timing-header" title="Key Generation">Keygen</th>
+    <th id="col14" class="harness-timing-header" title="Dataset encoding and encryption">DB Enc</th>
+    <th id="col15" class="harness-timing-header" title="Encrypted dataset preprocessing">Enc Prep</th>
+    <th id="col16" class="harness-timing-header" title="Query generation">Q Gen</th>
+    <th id="col17" class="harness-timing-header" title="Query preprocessing">Q Prep</th>
+    <th id="col18" class="harness-timing-header" title="Query encryption">Q Enc</th>
+    <th id="col19" class="harness-timing-header" title="Encrypted computation">Compute</th>
+    <th id="col20" class="harness-timing-header" title="Result decryption and postprocessing">Decrypt</th>
+    <th id="col21" class="divider"></th>
+    <th id="col22" class="server-timing-header" title="Total Time">Total</th>
+    <th id="col23" class="server-timing-header" title="Dataset generation">DB Gen</th>
+    <th id="col24" class="server-timing-header" title="Dataset preprocessing">DB Prep</th>
+    <th id="col25" class="server-timing-header" title="Key Generation">Keygen</th>
+    <th id="col26" class="server-timing-header" title="Dataset encoding and encryption">DB Enc</th>
+    <th id="col27" class="server-timing-header" title="Encrypted dataset preprocessing">Enc Prep</th>
+    <th id="col28" class="server-timing-header" title="Query generation">Q Gen</th>
+    <th id="col29" class="server-timing-header" title="Query preprocessing">Q Prep</th>
+    <th id="col30" class="server-timing-header" title="Query encryption">Q Enc</th>
+    <th id="col31" class="server-timing-header" title="Encrypted computation">Compute</th>
+    <th id="col32" class="server-timing-header" title="Result decryption and postprocessing">Decrypt</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td><a href="https://github.com/fhe-benchmarking/fetch-by-similarity">Reference</a></td><td>2026&#8209;02&#8209;13 22:21:16</td><td>CPU</td><td>L</td><td class="divider"></td><td>2.6G</td><td>5.6G</td><td>24M</td><td class="divider"></td><td>1.5079m</td><td>356ms</td><td>2.3ms</td><td>3.279s</td><td>34.97s</td><td>4.4ms</td><td>260.4ms</td><td>2.1333ms</td><td>541.7ms</td><td>50.78s</td><td>287ms</td><td class="divider"></td><td>50s</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>48.33s</td><td></td>
+                <td><a href="https://github.com/fhe-benchmarking/fetch-by-similarity">Reference</a></td><td>2026&#8209;02&#8209;13 22:21:16</td><td>CPU</td><td>L</td><td class="divider"></td><td>2.6G</td><td>5.6G</td><td>24M</td><td>13M</td><td class="divider"></td><td>1.4632m</td><td>353.5ms</td><td>2.5ms</td><td>2.9793s</td><td>32.87s</td><td>4.1ms</td><td>270.8ms</td><td>2.1667ms</td><td>460.4ms</td><td>50.57s</td><td>287.7ms</td><td class="divider"></td><td>50s</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>48s</td><td></td>
             </tr>
             <tr>
-                <td><a href="https://github.com/CryptoLabInc/fhe-benchmark-fetch-by-similarity">CryptoLab Inc.</a></td><td>2026&#8209;06&#8209;26 00:30:11</td><td>GPU</td><td>L</td><td class="divider"></td><td>3G</td><td>128M</td><td>64K</td><td class="divider"></td><td>7.8516s</td><td>235.5ms</td><td>74.2ms</td><td>3.6036s</td><td>572.7ms</td><td>3.0614s</td><td>116.3ms</td><td>46.53ms</td><td>20.63ms</td><td>40.03ms</td><td>80.7ms</td><td class="divider"></td><td>16.64ms</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>14.49ms</td><td></td>
+                <td><a href="https://github.com/CryptoLabInc/fhe-benchmark-fetch-by-similarity">CryptoLab Inc.</a></td><td>2026&#8209;06&#8209;26 00:30:11</td><td>GPU</td><td>L</td><td class="divider"></td><td>3G</td><td>128M</td><td>64K</td><td>1M</td><td class="divider"></td><td>7.8516s</td><td>235.5ms</td><td>74.2ms</td><td>3.6036s</td><td>572.7ms</td><td>3.0614s</td><td>116.3ms</td><td>46.53ms</td><td>20.63ms</td><td>40.03ms</td><td>80.7ms</td><td class="divider"></td><td>16.64ms</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>14.49ms</td><td></td>
             </tr>
         </tbody>
     </table>
@@ -85,9 +86,9 @@
                     columns: ':not(.no-toggle)'
                 }],
                 columnDefs: [
-                    { targets: [10, 11, 14, 15, 16, 19, 22, 23, 24, 25, 26, 27, 28, 29, 31], visible: false },
-                    { targets: [0, 1, 2, 3, 4, 6, 8, 9, 20], className: 'no-toggle' },
-                    { targets: [4, 8, 20], orderable: false, searchable: false, className: 'divider' }
+                    { targets: [11, 12, 15, 16, 17, 20, 23, 24, 25, 26, 27, 28, 29, 30, 32], visible: false },
+                    { targets: [0, 1, 2, 3, 4, 6, 9, 10, 21], className: 'no-toggle' },
+                    { targets: [4, 9, 21], orderable: false, searchable: false, className: 'divider' }
                 ],
                 pageLength: 25,
                 order: [[1, 'desc']]
