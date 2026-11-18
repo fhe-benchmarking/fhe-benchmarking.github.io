@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>FHE Benchmarking Results - (Count - Medium)</title>
+    <title>FHE Benchmarking Results - Fetch by Similarity (Count - Medium)</title>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
@@ -15,7 +15,9 @@
         #resultsTable thead tr:first-child th { background-color: #2c3e50; color: white; font-weight: bold; text-align: center; }
         #resultsTable thead tr:nth-child(2) th { background-color: #34495e; color: white; font-size: 0.9em; }
         .submitter-header { background-color: #3498db !important; }
+        .model-header { background-color: #3498db !important; }
         .bandwidth-header { background-color: #27ae60 !important; }
+        .quality-header { background-color: #103c88 !important; }
         .harness-timing-header { background-color: #e67e22 !important; }
         .server-timing-header { background-color: #9b59b6 !important; }
         #resultsTable tbody tr:nth-child(odd) { background-color: #ecf0f1; }
@@ -25,7 +27,7 @@
     </style>
 </head>
 <body>
-    <h1>FHE Benchmarking Results - (Count - Medium)</h1>
+    <h1>FHE Benchmarking Results - Fetch by Similarity (Count - Medium)</h1>
     
     <table id="resultsTable" class="display">
         <thead>
@@ -40,7 +42,7 @@
     <th id="col5" class="bandwidth-header" title="Size of keys">Keys</th>
     <th id="col6" class="bandwidth-header" title="Encrypted database size">DB</th>
     <th id="col7" class="bandwidth-header" title="Encrypted query size">Query</th>
-    <th id="col8" class="bandwidth-header" title="Encrypted results size">Results</th>
+    <th id="col8" class="bandwidth-header" title="Encrypted results size">Result</th>
     <th id="col9" class="divider"></th>
     <th id="col10" class="harness-timing-header" title="Total Time">Total</th>
     <th id="col11" class="harness-timing-header" title="Dataset generation">DB Gen</th>
@@ -73,6 +75,9 @@
             </tr>
             <tr>
                 <td><a href="https://github.com/CryptoLabInc/fhe-benchmark-fetch-by-similarity">CryptoLab Inc.</a></td><td>2026&#8209;06&#8209;26 00:30:11</td><td>GPU</td><td>L</td><td class="divider"></td><td>3G</td><td>4G</td><td>64K</td><td>1M</td><td class="divider"></td><td>28.9s</td><td>4.758s</td><td>827.7ms</td><td>3.6968s</td><td>14.75s</td><td>4.2849s</td><td>234.5ms</td><td>48.4ms</td><td>24.23ms</td><td>191.7ms</td><td>81.03ms</td><td class="divider"></td><td>167.6ms</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>164.5ms</td><td></td>
+            </tr>
+            <tr>
+                <td><a href="https://github.com/FastHE-Search/fetch-by-similarity">NYU/LG</a></td><td>2026&#8209;11&#8209;06 16:21:43</td><td>GPU</td><td>L</td><td class="divider"></td><td>325M</td><td>9G</td><td>1.1M</td><td>1M</td><td class="divider"></td><td>17.38s</td><td>8.624s</td><td>23.9ms</td><td>713.3ms</td><td>4.5612s</td><td>2.9611s</td><td>370ms</td><td>22.23ms</td><td>10.47ms</td><td>83.13ms</td><td>8.4ms</td><td class="divider"></td><td>81.45ms</td><td></td><td></td><td></td><td></td><td>2.9226s</td><td></td><td></td><td></td><td>77.07ms</td><td></td>
             </tr>
         </tbody>
     </table>
